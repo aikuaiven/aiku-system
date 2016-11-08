@@ -1,0 +1,173 @@
+APIENTRY	
+WINAPI	(:convention :stdcall)
+LPSTR	
+PCHAR	
+PSTR	(:pointer :char)
+PFLOAT	(:pointer :float)
+LPHANDLE	
+PHANDLE	
+PHKEY	(:pointer :handle)
+LPBOOL	
+LPBOOL	
+LPINT	
+PBOOL	
+PHALF_PTR	
+PINT	
+PLONG32	(:pointer :int)
+LPWORD	
+PINT16	
+PWORD	(:pointer :int16)
+LPCOLORREF	
+LPDWORD	
+PDWORD	
+PINT32	(:pointer :int32)
+PINT_PTR	
+PINT64	
+PLONG_PTR	
+PLONG64	
+PSSIZE_T	(:pointer :int64)
+PBOOLEAN	
+PBYTE	
+PINT8	(:pointer :int8)
+PLONGLONG	(:pointer :llong)
+LPLONG	
+PLONG	(:pointer :long)
+PSHORT	(:pointer :short)
+LPBYTE	
+PUCHAR	(:pointer :uchar)
+PDWORD32	
+PUHALF_PTR	
+PUINT	
+PULONG32	(:pointer :uint)
+PUINT16	(:pointer :uint16)
+PUINT32	(:pointer :uint32)
+PDWORD_PTR	
+PDWORD64	
+PDWORDLONG	
+PSIZE_T	
+PUINT_PTR	
+PUINT64	
+PULONG_PTR	
+PULONG64	(:pointer :uint64)
+PUINT8	(:pointer :uint8)
+PULONGLONG	(:pointer :ullong)
+PLCID	
+PULONG	(:pointer :ulong)
+PUNICODE_STRING	(:pointer :unicode-string)
+PUSHORT	(:pointer :ushort)
+LPCVOID	
+LPVOID	
+SC_LOCK	(:pointer :void)
+PTBYTE	
+PTCHAR	
+PWCHAR	(:pointer :wchar)
+LPCSTR	(:string :encoding :ascii)
+PCSTR	(:string :encoding :ascii)
+LPCTSTR	(:string :encoding :utf-16le)
+LPCWSTR	(:string :encoding :utf-16le)
+LPTSTR	(:string :encoding :utf-16le)
+LPWSTR	(:string :encoding :utf-16le)
+PCTSTR	(:string :encoding :utf-16le)
+PCWSTR	(:string :encoding :utf-16le)
+PTSTR	(:string :encoding :utf-16le)
+PWSTR	(:string :encoding :utf-16le)
+PVOID	(:string :void)
+CCHAR	
+CHAR	
+INT8	:char
+FLOAT	:float
+HACCEL	
+HANDLE	
+HBITMAP	
+HBRUSH	
+HCOLORSPACE	
+HCONV	
+HCONVLIST	
+HCURSOR	
+HDC	
+HDDEDATA	
+HDESK	
+HDROP	
+HDWP	
+HENHMETAFILE	
+HFONT	
+HGDIOBJ	
+HGLOBAL	
+HHOOK	
+HICON	
+HINSTANCE	
+HKEY	
+HKL	
+HLOCAL	
+HMENU	
+HMETAFILE	
+HMODULE	
+HMONITOR	
+HPALETTE	
+HPEN	
+HRGN	
+HRSRC	
+HSZ	
+HWND	
+SC_HANDLE	
+SERVICE_STATUS_HANDLE	
+WINSTA	:handle
+BOOL	
+HALF_PTR	
+HFILE	
+INT	
+INT32	
+LONG32	:int
+ATOM	
+LANGID	:int16
+COLORREF	
+LCID	
+LCTYPE	
+LGRPID	:int32
+INT_PTR	
+INT64	
+LONG64	
+LONGLONG	
+LRESULT	
+SSIZE_T	
+UINT64	:int64
+BOOLEAN	:int8
+USN	:llong
+HRESULT	
+LONG	
+LONG_PTR	
+LPARAM	:long
+CALLBACK	
+POINTER_32	
+POINTER_64	
+POINTER_signed	
+POINTER_UNsigned	:pointer
+INT16	
+SHORT	:short
+BYTE	
+UCHAR	
+UINT8	:uchar
+DWORD32	
+UHALF_PTR	
+UINT	
+UINT32	
+ULONG32	:uint
+DWORD_PTR	
+DWORD64	
+DWORDLONG	
+QWORD	
+SIZE_T	
+UINT_PTR	
+ULONG_PTR	
+ULONG64	
+ULONGLONG	
+WPARAM	:uint64
+DWORD	
+ULONG	:ulong
+UINT16	
+USHORT	
+WORD	:ushort
+VOID	:void
+TBYTE	
+TCHAR	
+WCHAR	:wchar
