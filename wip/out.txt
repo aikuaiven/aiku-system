@@ -1,0 +1,4034 @@
+
+(cffi:defcfun (init-once-initialize "InitOnceInitialize" :convention :stdcall :library "user32.dll")
+:void
+(init-once (:pointer (:struct pinit_once))))
+
+(cffi:defcfun (init-once-execute-once "InitOnceExecuteOnce" :convention :stdcall :library "user32.dll")
+:int
+(init-once (:pointer (:struct pinit_once)))
+(init-fn (:pointer (:struct pinit_once_fn)))
+(parameter (:string :void))
+(context (:pointer :void)))
+
+(cffi:defcfun (init-once-begin-initialize "InitOnceBeginInitialize" :convention :stdcall :library "user32.dll")
+:int
+(lp-init-once (:pointer (:struct lpinit_once)))
+(dw-flags :ulong)
+(f-pending (:pointer :int))
+(lp-context (:pointer :void)))
+
+(cffi:defcfun (init-once-complete "InitOnceComplete" :convention :stdcall :library "user32.dll")
+:int
+(lp-init-once (:pointer (:struct lpinit_once)))
+(dw-flags :ulong)
+(lp-context (:pointer :void)))
+
+(cffi:defcfun (initialize-srw-lock "InitializeSRWLock" :convention :stdcall :library "user32.dll")
+:void
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (release-srw-lock-exclusive "ReleaseSRWLockExclusive" :convention :stdcall :library "user32.dll")
+:void
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (release-srw-lock-shared "ReleaseSRWLockShared" :convention :stdcall :library "user32.dll")
+:void
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (acquire-srw-lock-exclusive "AcquireSRWLockExclusive" :convention :stdcall :library "user32.dll")
+:void
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (acquire-srw-lock-shared "AcquireSRWLockShared" :convention :stdcall :library "user32.dll")
+:void
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (try-acquire-srw-lock-exclusive "TryAcquireSRWLockExclusive" :convention :stdcall :library "user32.dll")
+:int8
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (try-acquire-srw-lock-shared "TryAcquireSRWLockShared" :convention :stdcall :library "user32.dll")
+:int8
+(srw-lock (:pointer (:struct psrwlock))))
+
+(cffi:defcfun (initialize-condition-variable "InitializeConditionVariable" :convention :stdcall :library "user32.dll")
+:void
+(condition-variable (:pointer (:struct pcondition_variable))))
+
+(cffi:defcfun (wake-condition-variable "WakeConditionVariable" :convention :stdcall :library "user32.dll")
+:void
+(condition-variable (:pointer (:struct pcondition_variable))))
+
+(cffi:defcfun (wake-all-condition-variable "WakeAllConditionVariable" :convention :stdcall :library "user32.dll")
+:void
+(condition-variable (:pointer (:struct pcondition_variable))))
+
+(cffi:defcfun (sleep-condition-variable-cs "SleepConditionVariableCS" :convention :stdcall :library "user32.dll")
+:int
+(condition-variable (:pointer (:struct pcondition_variable)))
+(critical-section (:pointer (:struct pcritical_section)))
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (sleep-condition-variable-sr "SleepConditionVariableSRW" :convention :stdcall :library "user32.dll")
+:int
+(condition-variable (:pointer (:struct pcondition_variable)))
+(srw-lock (:pointer (:struct psrwlock)))
+(dw-milliseconds :ulong)
+(flags :ulong))
+
+(cffi:defcfun (encode-pointer "EncodePointer" :convention :stdcall :library "user32.dll")
+(:string :void)
+(ptr (:string :void)))
+
+(cffi:defcfun (decode-pointer "DecodePointer" :convention :stdcall :library "user32.dll")
+(:string :void)
+(ptr (:string :void)))
+
+(cffi:defcfun (encode-system-pointer "EncodeSystemPointer" :convention :stdcall :library "user32.dll")
+(:string :void)
+(ptr (:string :void)))
+
+(cffi:defcfun (decode-system-pointer "DecodeSystemPointer" :convention :stdcall :library "user32.dll")
+(:string :void)
+(ptr (:string :void)))
+
+(cffi:defcfun (get-free-space "GetFreeSpace" :convention :stdcall :library "user32.dll")
+:ulong
+(uint :uint))
+
+(cffi:defcfun (interlocked-increment "InterlockedIncrement" :convention :stdcall :library "user32.dll")
+:long
+(lp-addend (:pointer (:struct volatile))))
+
+(cffi:defcfun (interlocked-decrement "InterlockedDecrement" :convention :stdcall :library "user32.dll")
+:long
+(lp-addend (:pointer (:struct volatile))))
+
+(cffi:defcfun (interlocked-exchange "InterlockedExchange" :convention :stdcall :library "user32.dll")
+:long
+(target (:pointer (:struct volatile)))
+(value :long))
+
+(cffi:defcfun (interlocked-exchange-add "InterlockedExchangeAdd" :convention :stdcall :library "user32.dll")
+:long
+(addend (:pointer (:struct volatile)))
+(value :long))
+
+(cffi:defcfun (interlocked-compare-exchange "InterlockedCompareExchange" :convention :stdcall :library "user32.dll")
+:long
+(destination (:pointer (:struct volatile)))
+(exchange :long)
+(comperand :long))
+
+(cffi:defcfun (interlocked-compare-exchange64 "InterlockedCompareExchange64" :convention :stdcall :library "user32.dll")
+:int64
+(destination (:pointer (:struct volatile)))
+(exchange :int64)
+(comperand :int64))
+
+(cffi:defcfun (initialize-s-list-head "InitializeSListHead" :convention :stdcall :library "user32.dll")
+:void
+(list-head (:pointer (:struct pslist_header))))
+
+(cffi:defcfun (interlocked-pop-entry-s-list "InterlockedPopEntrySList" :convention :stdcall :library "user32.dll")
+:PSLIST_ENTRY
+(list-head (:pointer (:struct pslist_header))))
+
+(cffi:defcfun (interlocked-push-entry-s-list "InterlockedPushEntrySList" :convention :stdcall :library "user32.dll")
+:PSLIST_ENTRY
+(list-head (:pointer (:struct pslist_header)))
+(list-entry (:pointer (:struct pslist_entry))))
+
+(cffi:defcfun (interlocked-flush-s-list "InterlockedFlushSList" :convention :stdcall :library "user32.dll")
+:PSLIST_ENTRY
+(list-head (:pointer (:struct pslist_header))))
+
+(cffi:defcfun (query-depth-s-list "QueryDepthSList" :convention :stdcall :library "user32.dll")
+:ushort
+(list-head (:pointer (:struct pslist_header))))
+
+(cffi:defcfun (free-resource "FreeResource" :convention :stdcall :library "user32.dll")
+:int
+(h-res-data :handle))
+
+(cffi:defcfun (lock-resource "LockResource" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-res-data :handle))
+
+(cffi:defcfun (free-library "FreeLibrary" :convention :stdcall :library "user32.dll")
+:int
+(h-lib-module :handle))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:DECLSPEC_NORETURN
+(free-library-and-exit-thread (:pointer (:struct freelibraryandexitthread)))
+(h-lib-module :handle)
+(dw-exit-code :ulong))
+
+(cffi:defcfun (disable-thread-library-calls "DisableThreadLibraryCalls" :convention :stdcall :library "user32.dll")
+:int
+(h-lib-module :handle))
+
+(cffi:defcfun (get-proc-address "GetProcAddress" :convention :stdcall :library "user32.dll")
+:FARPROC
+(h-module :handle)
+(lp-proc-name (:string :encoding :ascii)))
+
+(cffi:defcfun (get-version "GetVersion" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (global-alloc "GlobalAlloc" :convention :stdcall :library "user32.dll")
+:handle
+(u-flags :uint)
+(dw-bytes :uint64))
+
+(cffi:defcfun (global-re-alloc "GlobalReAlloc" :convention :stdcall :library "user32.dll")
+:handle
+(h-mem :handle)
+(dw-bytes :uint64)
+(u-flags :uint))
+
+(cffi:defcfun (global-size "GlobalSize" :convention :stdcall :library "user32.dll")
+:uint64
+(h-mem :handle))
+
+(cffi:defcfun (global-flags "GlobalFlags" :convention :stdcall :library "user32.dll")
+:uint
+(h-mem :handle))
+
+(cffi:defcfun (global-lock "GlobalLock" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-mem :handle))
+
+(cffi:defcfun (global-handle "GlobalHandle" :convention :stdcall :library "user32.dll")
+:handle
+(p-mem (:pointer :void)))
+
+(cffi:defcfun (global-unlock "GlobalUnlock" :convention :stdcall :library "user32.dll")
+:int
+(h-mem :handle))
+
+(cffi:defcfun (global-free "GlobalFree" :convention :stdcall :library "user32.dll")
+:handle
+(h-mem :handle))
+
+(cffi:defcfun (global-compact "GlobalCompact" :convention :stdcall :library "user32.dll")
+:uint64
+(dw-min-free :ulong))
+
+(cffi:defcfun (global-fix "GlobalFix" :convention :stdcall :library "user32.dll")
+:void
+(h-mem :handle))
+
+(cffi:defcfun (global-unfix "GlobalUnfix" :convention :stdcall :library "user32.dll")
+:void
+(h-mem :handle))
+
+(cffi:defcfun (global-wire "GlobalWire" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-mem :handle))
+
+(cffi:defcfun (global-un-wire "GlobalUnWire" :convention :stdcall :library "user32.dll")
+:int
+(h-mem :handle))
+
+(cffi:defcfun (global-memory-status "GlobalMemoryStatus" :convention :stdcall :library "user32.dll")
+:void
+(lp-buffer (:pointer (:struct lpmemorystatus))))
+
+(cffi:defcfun (global-memory-status-ex "GlobalMemoryStatusEx" :convention :stdcall :library "user32.dll")
+:int
+(lp-buffer (:pointer (:struct lpmemorystatusex))))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:UFLAGS&LMEM_FIXED
+(local-alloc (:pointer (:struct localalloc)))
+(u-flags :uint)
+(u-bytes :uint64))
+
+(cffi:defcfun (local-re-alloc "LocalReAlloc" :convention :stdcall :library "user32.dll")
+:handle
+(h-mem :handle)
+(u-bytes :uint64)
+(u-flags :uint))
+
+(cffi:defcfun (local-lock "LocalLock" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-mem :handle))
+
+(cffi:defcfun (local-handle "LocalHandle" :convention :stdcall :library "user32.dll")
+:handle
+(p-mem (:pointer :void)))
+
+(cffi:defcfun (local-unlock "LocalUnlock" :convention :stdcall :library "user32.dll")
+:int
+(h-mem :handle))
+
+(cffi:defcfun (local-size "LocalSize" :convention :stdcall :library "user32.dll")
+:uint64
+(h-mem :handle))
+
+(cffi:defcfun (local-flags "LocalFlags" :convention :stdcall :library "user32.dll")
+:uint
+(h-mem :handle))
+
+(cffi:defcfun (local-free "LocalFree" :convention :stdcall :library "user32.dll")
+:handle
+(h-mem :handle))
+
+(cffi:defcfun (local-shrink "LocalShrink" :convention :stdcall :library "user32.dll")
+:uint64
+(h-mem :handle)
+(cb-new-size :uint))
+
+(cffi:defcfun (local-compact "LocalCompact" :convention :stdcall :library "user32.dll")
+:uint64
+(u-min-free :uint))
+
+(cffi:defcfun (flush-instruction-cache "FlushInstructionCache" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-base-address (:pointer :void))
+(dw-size :uint64))
+
+(cffi:defcfun (flush-process-write-buffers "FlushProcessWriteBuffers" :convention :stdcall :library "user32.dll")
+:void
+(void :void))
+
+(cffi:defcfun (query-thread-cycle-time "QueryThreadCycleTime" :convention :stdcall :library "user32.dll")
+:int
+(thread-handle :int64)
+(cycle-time (:pointer :uint64)))
+
+(cffi:defcfun (query-process-cycle-time "QueryProcessCycleTime" :convention :stdcall :library "user32.dll")
+:int
+(process-handle :int64)
+(cycle-time (:pointer :uint64)))
+
+(cffi:defcfun (query-idle-processor-cycle-time "QueryIdleProcessorCycleTime" :convention :stdcall :library "user32.dll")
+:int
+(buffer-length (:pointer :ulong))
+(processor-idle-cycle-time (:pointer :uint64)))
+
+(cffi:defcfun (query-idle-processor-cycle-time-ex "QueryIdleProcessorCycleTimeEx" :convention :stdcall :library "user32.dll")
+:int
+(group :ushort)
+(buffer-length (:pointer :ulong))
+(processor-idle-cycle-time (:pointer :uint64)))
+
+(cffi:defcfun (query-unbiased-interrupt-time "QueryUnbiasedInterruptTime" :convention :stdcall :library "user32.dll")
+:int
+(unbiased-time (:pointer :ullong)))
+
+(cffi:defcfun (get-processor-system-cycle-time "GetProcessorSystemCycleTime" :convention :stdcall :library "user32.dll")
+:int
+(group :ushort)
+(returned-length (:pointer :int32)))
+
+(cffi:defcfun (virtual-alloc "VirtualAlloc" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(fl-allocation-type :ulong)
+(fl-protect :ulong))
+
+(cffi:defcfun (virtual-free "VirtualFree" :convention :stdcall :library "user32.dll")
+:int
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(dw-free-type :ulong))
+
+(cffi:defcfun (virtual-protect "VirtualProtect" :convention :stdcall :library "user32.dll")
+:int
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(fl-new-protect :ulong)
+(lpfl-old-protect (:pointer :int32)))
+
+(cffi:defcfun (virtual-query "VirtualQuery" :convention :stdcall :library "user32.dll")
+:uint64
+(lp-address (:pointer :void))
+(dw-length :uint64))
+
+(cffi:defcfun (virtual-alloc-ex "VirtualAllocEx" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-process :int64)
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(fl-allocation-type :ulong)
+(fl-protect :ulong))
+
+(cffi:defcfun (virtual-alloc-ex-numa "VirtualAllocExNuma" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-process :int64)
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(fl-allocation-type :ulong)
+(fl-protect :ulong)
+(nnd-preferred :ulong))
+
+(cffi:defcfun (get-write-watch "GetWriteWatch" :convention :stdcall :library "user32.dll")
+:uint
+(dw-flags :ulong)
+(lp-base-address (:string :void))
+(dw-region-size :uint64)
+(lpdw-count :uint64)
+(lpdw-granularity (:pointer :ulong)))
+
+(cffi:defcfun (reset-write-watch "ResetWriteWatch" :convention :stdcall :library "user32.dll")
+:uint
+(lp-base-address (:pointer :void))
+(dw-region-size :uint64))
+
+(cffi:defcfun (get-large-page-minimum "GetLargePageMinimum" :convention :stdcall :library "user32.dll")
+:uint64
+(void :void))
+
+(cffi:defcfun (enum-system-firmware-tables "EnumSystemFirmwareTables" :convention :stdcall :library "user32.dll")
+:uint
+(firmware-table-provider-signature :ulong)
+(buffer-size :ulong))
+
+(cffi:defcfun (get-system-firmware-table "GetSystemFirmwareTable" :convention :stdcall :library "user32.dll")
+:uint
+(firmware-table-provider-signature :ulong)
+(firmware-table-id :ulong)
+(buffer-size :ulong))
+
+(cffi:defcfun (get-physically-installed-system-memory "GetPhysicallyInstalledSystemMemory" :convention :stdcall :library "user32.dll")
+:int
+(total-memory-in-kilobytes (:pointer :ullong)))
+
+(cffi:defcfun (virtual-free-ex "VirtualFreeEx" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(dw-free-type :ulong))
+
+(cffi:defcfun (virtual-protect-ex "VirtualProtectEx" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-address (:pointer :void))
+(dw-size :uint64)
+(fl-new-protect :ulong)
+(lpfl-old-protect (:pointer :int32)))
+
+(cffi:defcfun (virtual-query-ex "VirtualQueryEx" :convention :stdcall :library "user32.dll")
+:uint64
+(h-process :int64)
+(lp-address (:pointer :void))
+(dw-length :uint64))
+
+(cffi:defcfun (heap-create "HeapCreate" :convention :stdcall :library "user32.dll")
+:int64
+(fl-options :ulong)
+(dw-initial-size :uint64)
+(dw-maximum-size :uint64))
+
+(cffi:defcfun (heap-destroy "HeapDestroy" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64))
+
+(cffi:defcfun (heap-alloc "HeapAlloc" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-heap :int64)
+(dw-flags :ulong)
+(dw-bytes :uint64))
+
+(cffi:defcfun (heap-re-alloc "HeapReAlloc" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-heap :int64)
+(dw-flags :ulong)
+(lp-mem (:pointer :void))
+(dw-bytes :uint64))
+
+(cffi:defcfun (heap-free "HeapFree" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64)
+(dw-flags :ulong)
+(lp-mem (:pointer :void)))
+
+(cffi:defcfun (heap-size "HeapSize" :convention :stdcall :library "user32.dll")
+:uint64
+(h-heap :int64)
+(dw-flags :ulong)
+(lp-mem (:pointer :void)))
+
+(cffi:defcfun (heap-validate "HeapValidate" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64)
+(dw-flags :ulong)
+(lp-mem (:pointer :void)))
+
+(cffi:defcfun (heap-compact "HeapCompact" :convention :stdcall :library "user32.dll")
+:uint64
+(h-heap :int64)
+(dw-flags :ulong))
+
+(cffi:defcfun (get-process-heap "GetProcessHeap" :convention :stdcall :library "user32.dll")
+:int64)
+
+(cffi:defcfun (get-process-heaps "GetProcessHeaps" :convention :stdcall :library "user32.dll")
+:ulong
+(number-of-heaps :ulong))
+
+(cffi:defcfun (heap-lock "HeapLock" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64))
+
+(cffi:defcfun (heap-unlock "HeapUnlock" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64))
+
+(cffi:defcfun (heap-walk "HeapWalk" :convention :stdcall :library "user32.dll")
+:int
+(h-heap :int64)
+(lp-entry (:pointer (:struct lpprocess_heap_entry))))
+
+(cffi:defcfun (heap-set-information "HeapSetInformation" :convention :stdcall :library "user32.dll")
+:int
+(heap-handle :int64)
+(heap-information-class (:pointer (:struct heap_information_class)))
+(heap-information (:string :void))
+(heap-information-length :uint64))
+
+(cffi:defcfun (heap-query-information "HeapQueryInformation" :convention :stdcall :library "user32.dll")
+:int
+(heap-handle :int64)
+(heap-information-class (:pointer (:struct heap_information_class)))
+(heap-information-length :uint64)
+(return-length (:pointer :uint64)))
+
+(cffi:defcfun (get-binary-type "GetBinaryTypeW" :convention :stdcall :library "user32.dll")
+:int
+(lp-application-name (:string :encoding :utf-16le))
+(lp-binary-type (:pointer :int32)))
+
+(cffi:defcfun (get-short-path-name "GetShortPathNameW" :convention :stdcall :library "user32.dll")
+:ulong
+(lpsz-long-path (:string :encoding :utf-16le))
+(cch-buffer :ulong))
+
+(cffi:defcfun (get-long-path-name "GetLongPathNameW" :convention :stdcall :library "user32.dll")
+:ulong
+(lpsz-short-path (:string :encoding :utf-16le))
+(cch-buffer :ulong))
+
+(cffi:defcfun (get-long-path-name-transacted "GetLongPathNameTransactedW" :convention :stdcall :library "user32.dll")
+:ulong
+(lpsz-short-path (:string :encoding :utf-16le))
+(cch-buffer :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (get-process-affinity-mask "GetProcessAffinityMask" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-process-affinity-mask (:pointer :uint64))
+(lp-system-affinity-mask (:pointer :uint64)))
+
+(cffi:defcfun (set-process-affinity-mask "SetProcessAffinityMask" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-process-affinity-mask :uint64))
+
+(cffi:defcfun (get-process-handle-count "GetProcessHandleCount" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(pdw-handle-count (:pointer :int32)))
+
+(cffi:defcfun (get-process-times "GetProcessTimes" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-creation-time (:pointer (:struct lpfiletime)))
+(lp-exit-time (:pointer (:struct lpfiletime)))
+(lp-kernel-time (:pointer (:struct lpfiletime)))
+(lp-user-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (get-process-io-counters "GetProcessIoCounters" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-io-counters (:pointer (:struct pio_counters))))
+
+(cffi:defcfun (get-process-working-set-size "GetProcessWorkingSetSize" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-minimum-working-set-size (:pointer :uint64))
+(lp-maximum-working-set-size (:pointer :uint64)))
+
+(cffi:defcfun (get-process-working-set-size-ex "GetProcessWorkingSetSizeEx" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-minimum-working-set-size (:pointer :uint64))
+(lp-maximum-working-set-size (:pointer :uint64))
+(flags (:pointer :int32)))
+
+(cffi:defcfun (set-process-working-set-size "SetProcessWorkingSetSize" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-minimum-working-set-size :uint64)
+(dw-maximum-working-set-size :uint64))
+
+(cffi:defcfun (set-process-working-set-size-ex "SetProcessWorkingSetSizeEx" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-minimum-working-set-size :uint64)
+(dw-maximum-working-set-size :uint64)
+(flags :ulong))
+
+(cffi:defcfun (set-process-affinity-update-mode "SetProcessAffinityUpdateMode" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-flags :ulong))
+
+(cffi:defcfun (query-process-affinity-update-mode "QueryProcessAffinityUpdateMode" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lpdw-flags (:pointer :int32)))
+
+(cffi:defcfun (open-process "OpenProcess" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(dw-process-id :ulong))
+
+(cffi:defcfun (get-current-process "GetCurrentProcess" :convention :stdcall :library "user32.dll")
+:int64
+(void :void))
+
+(cffi:defcfun (get-current-process-id "GetCurrentProcessId" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:DECLSPEC_NORETURN
+(exit-process (:pointer (:struct exitprocess)))
+(u-exit-code :uint))
+
+(cffi:defcfun (terminate-process "TerminateProcess" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(u-exit-code :uint))
+
+(cffi:defcfun (get-exit-code-process "GetExitCodeProcess" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-exit-code (:pointer :int32)))
+
+(cffi:defcfun (fatal-exit "FatalExit" :convention :stdcall :library "user32.dll")
+:void
+(exit-code :int))
+
+(cffi:defcfun (get-environment-strings "GetEnvironmentStrings" :convention :stdcall :library "user32.dll")
+:LPCH
+(void :void))
+
+(cffi:defcfun (get-environment-strings "GetEnvironmentStringsW" :convention :stdcall :library "user32.dll")
+:LPWCH
+(void :void))
+
+(cffi:defcfun (set-environment-strings "SetEnvironmentStringsW" :convention :stdcall :library "user32.dll")
+:int
+(new-environment (:pointer (:struct lpwch))))
+
+(cffi:defcfun (free-environment-strings "FreeEnvironmentStringsW" :convention :stdcall :library "user32.dll")
+:int
+(lpwch (:pointer (:struct lpwch))))
+
+(cffi:defcfun (raise-exception "RaiseException" :convention :stdcall :library "user32.dll")
+:void
+(dw-exception-code :ulong)
+(dw-exception-flags :ulong)
+(n-number-of-arguments :ulong)
+(lp-arguments :uint64))
+
+(cffi:defcfun (raise-fail-fast-exception "RaiseFailFastException" :convention :stdcall :library "user32.dll")
+:void
+(p-exception-record (:pointer (:struct pexception_record)))
+(p-context-record (:pointer (:struct pcontext)))
+(dw-flags :ulong))
+
+(cffi:defcfun (unhandled-exception-filter "UnhandledExceptionFilter" :convention :stdcall :library "user32.dll")
+:long
+(exception-info (:pointer (:struct _exception_pointers))))
+
+(cffi:defcfun (set-unhandled-exception-filter "SetUnhandledExceptionFilter" :convention :stdcall :library "user32.dll")
+:LPTOP_LEVEL_EXCEPTION_FILTER
+(lp-top-level-exception-filter (:pointer (:struct lptop_level_exception_filter))))
+
+(cffi:defcfun (create-fiber "CreateFiber" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(dw-stack-size :uint64)
+(lp-start-address (:pointer (:struct lpfiber_start_routine)))
+(lp-parameter (:pointer :void)))
+
+(cffi:defcfun (create-fiber-ex "CreateFiberEx" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(dw-stack-commit-size :uint64)
+(dw-stack-reserve-size :uint64)
+(dw-flags :ulong)
+(lp-start-address (:pointer (:struct lpfiber_start_routine)))
+(lp-parameter (:pointer :void)))
+
+(cffi:defcfun (delete-fiber "DeleteFiber" :convention :stdcall :library "user32.dll")
+:void
+(lp-fiber (:pointer :void)))
+
+(cffi:defcfun (convert-thread-to-fiber "ConvertThreadToFiber" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(lp-parameter (:pointer :void)))
+
+(cffi:defcfun (convert-thread-to-fiber-ex "ConvertThreadToFiberEx" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(lp-parameter (:pointer :void))
+(dw-flags :ulong))
+
+(cffi:defcfun (convert-fiber-to-thread "ConvertFiberToThread" :convention :stdcall :library "user32.dll")
+:int
+(void :void))
+
+(cffi:defcfun (is-thread-a-fiber "IsThreadAFiber" :convention :stdcall :library "user32.dll")
+:int
+(void :void))
+
+(cffi:defcfun (switch-to-fiber "SwitchToFiber" :convention :stdcall :library "user32.dll")
+:void
+(lp-fiber (:pointer :void)))
+
+(cffi:defcfun (switch-to-thread "SwitchToThread" :convention :stdcall :library "user32.dll")
+:int
+(void :void))
+
+(cffi:defcfun (create-ums-completion-list "CreateUmsCompletionList" :convention :stdcall :library "user32.dll")
+:int
+(ums-completion-list (:pointer (:struct pums_completion_list))))
+
+(cffi:defcfun (dequeue-ums-completion-list-items "DequeueUmsCompletionListItems" :convention :stdcall :library "user32.dll")
+:int
+(ums-completion-list (:pointer (:struct pums_completion_list)))
+(wait-time-out :ulong)
+(ums-thread-list (:pointer (:struct pums_context))))
+
+(cffi:defcfun (get-ums-completion-list-event "GetUmsCompletionListEvent" :convention :stdcall :library "user32.dll")
+:int
+(ums-completion-list (:pointer (:struct pums_completion_list)))
+(ums-completion-event (:pointer :handle)))
+
+(cffi:defcfun (execute-ums-thread "ExecuteUmsThread" :convention :stdcall :library "user32.dll")
+:int
+(ums-thread (:pointer (:struct pums_context))))
+
+(cffi:defcfun (ums-thread-yield "UmsThreadYield" :convention :stdcall :library "user32.dll")
+:int
+(scheduler-param (:string :void)))
+
+(cffi:defcfun (delete-ums-completion-list "DeleteUmsCompletionList" :convention :stdcall :library "user32.dll")
+:int
+(ums-completion-list (:pointer (:struct pums_completion_list))))
+
+(cffi:defcfun (get-current-ums-thread "GetCurrentUmsThread" :convention :stdcall :library "user32.dll")
+:PUMS_CONTEXT
+(void :void))
+
+(cffi:defcfun (get-next-ums-list-item "GetNextUmsListItem" :convention :stdcall :library "user32.dll")
+:PUMS_CONTEXT
+(ums-context (:pointer (:struct pums_context))))
+
+(cffi:defcfun (query-ums-thread-information "QueryUmsThreadInformation" :convention :stdcall :library "user32.dll")
+:int
+(ums-thread (:pointer (:struct pums_context)))
+(ums-thread-info-class (:pointer (:struct ums_thread_info_class)))
+(ums-thread-information-length :ulong)
+(return-length (:pointer :ulong)))
+
+(cffi:defcfun (set-ums-thread-information "SetUmsThreadInformation" :convention :stdcall :library "user32.dll")
+:int
+(ums-thread (:pointer (:struct pums_context)))
+(ums-thread-info-class (:pointer (:struct ums_thread_info_class)))
+(ums-thread-information (:string :void))
+(ums-thread-information-length :ulong))
+
+(cffi:defcfun (delete-ums-thread-context "DeleteUmsThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(ums-thread (:pointer (:struct pums_context))))
+
+(cffi:defcfun (create-ums-thread-context "CreateUmsThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(lp-ums-thread (:pointer (:struct pums_context))))
+
+(cffi:defcfun (enter-ums-scheduling-mode "EnterUmsSchedulingMode" :convention :stdcall :library "user32.dll")
+:int
+(scheduler-startup-info (:pointer (:struct pums_scheduler_startup_info))))
+
+(cffi:defcfun (create-thread "CreateThread" :convention :stdcall :library "user32.dll")
+:int64
+(lp-thread-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-stack-size :uint64)
+(lp-start-address (:pointer (:struct lpthread_start_routine)))
+(lp-parameter (:pointer :void))
+(dw-creation-flags :ulong)
+(lp-thread-id (:pointer :int32)))
+
+(cffi:defcfun (create-remote-thread "CreateRemoteThread" :convention :stdcall :library "user32.dll")
+:int64
+(h-process :int64)
+(lp-thread-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-stack-size :uint64)
+(lp-start-address (:pointer (:struct lpthread_start_routine)))
+(lp-parameter (:pointer :void))
+(dw-creation-flags :ulong)
+(lp-thread-id (:pointer :int32)))
+
+(cffi:defcfun (create-remote-thread-ex "CreateRemoteThreadEx" :convention :stdcall :library "user32.dll")
+:int64
+(h-process :int64)
+(lp-thread-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-stack-size :uint64)
+(lp-start-address (:pointer (:struct lpthread_start_routine)))
+(lp-parameter (:pointer :void))
+(dw-creation-flags :ulong)
+(lp-attribute-list (:pointer (:struct lpproc_thread_attribute_list)))
+(lp-thread-id (:pointer :int32)))
+
+(cffi:defcfun (get-current-thread "GetCurrentThread" :convention :stdcall :library "user32.dll")
+:int64
+(void :void))
+
+(cffi:defcfun (get-current-thread-id "GetCurrentThreadId" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (set-thread-stack-guarantee "SetThreadStackGuarantee" :convention :stdcall :library "user32.dll")
+:int
+(stack-size-in-bytes (:pointer :ulong)))
+
+(cffi:defcfun (get-process-id-of-thread "GetProcessIdOfThread" :convention :stdcall :library "user32.dll")
+:ulong
+(thread :int64))
+
+(cffi:defcfun (get-thread-id "GetThreadId" :convention :stdcall :library "user32.dll")
+:ulong
+(thread :int64))
+
+(cffi:defcfun (get-process-id "GetProcessId" :convention :stdcall :library "user32.dll")
+:ulong
+(process :int64))
+
+(cffi:defcfun (get-current-processor-number "GetCurrentProcessorNumber" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (get-current-processor-number-ex "GetCurrentProcessorNumberEx" :convention :stdcall :library "user32.dll")
+:void
+(proc-number (:pointer (:struct pprocessor_number))))
+
+(cffi:defcfun (get-thread-group-affinity "GetThreadGroupAffinity" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(group-affinity (:pointer (:struct pgroup_affinity))))
+
+(cffi:defcfun (set-thread-affinity-mask "SetThreadAffinityMask" :convention :stdcall :library "user32.dll")
+:uint64
+(h-thread :int64)
+(dw-thread-affinity-mask :uint64))
+
+(cffi:defcfun (set-thread-group-affinity "SetThreadGroupAffinity" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(group-affinity (:pointer (:struct group_affinity)))
+(previous-group-affinity (:pointer (:struct pgroup_affinity))))
+
+(cffi:defcfun (set-thread-ideal-processor-ex "SetThreadIdealProcessorEx" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-ideal-processor (:pointer (:struct pprocessor_number)))
+(lp-previous-ideal-processor (:pointer (:struct pprocessor_number))))
+
+(cffi:defcfun (get-thread-ideal-processor-ex "GetThreadIdealProcessorEx" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-ideal-processor (:pointer (:struct pprocessor_number))))
+
+(cffi:defcfun (set-thread-ideal-processor "SetThreadIdealProcessor" :convention :stdcall :library "user32.dll")
+:ulong
+(h-thread :int64)
+(dw-ideal-processor :ulong))
+
+(cffi:defcfun (set-process-dep-policy "SetProcessDEPPolicy" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong))
+
+(cffi:defcfun (get-process-dep-policy "GetProcessDEPPolicy" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-flags (:pointer :int32))
+(lp-permanent (:pointer :int)))
+
+(cffi:defcfun (set-process-priority-boost "SetProcessPriorityBoost" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(b-disable-priority-boost :int))
+
+(cffi:defcfun (get-process-priority-boost "GetProcessPriorityBoost" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(p-disable-priority-boost (:pointer :int)))
+
+(cffi:defcfun (request-wakeup-latency "RequestWakeupLatency" :convention :stdcall :library "user32.dll")
+:int
+(latency (:pointer (:struct latency_time))))
+
+(cffi:defcfun (is-system-resume-automatic "IsSystemResumeAutomatic" :convention :stdcall :library "user32.dll")
+:int
+(void :void))
+
+(cffi:defcfun (open-thread "OpenThread" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(dw-thread-id :ulong))
+
+(cffi:defcfun (set-thread-priority "SetThreadPriority" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(n-priority :int))
+
+(cffi:defcfun (set-thread-priority-boost "SetThreadPriorityBoost" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(b-disable-priority-boost :int))
+
+(cffi:defcfun (get-thread-priority-boost "GetThreadPriorityBoost" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(p-disable-priority-boost (:pointer :int)))
+
+(cffi:defcfun (get-thread-priority "GetThreadPriority" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64))
+
+(cffi:defcfun (get-thread-times "GetThreadTimes" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-creation-time (:pointer (:struct lpfiletime)))
+(lp-exit-time (:pointer (:struct lpfiletime)))
+(lp-kernel-time (:pointer (:struct lpfiletime)))
+(lp-user-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (get-thread-io-pending-flag "GetThreadIOPendingFlag" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-io-is-pending (:pointer :int)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:DECLSPEC_NORETURN
+(exit-thread (:pointer (:struct exitthread)))
+(dw-exit-code :ulong))
+
+(cffi:defcfun (terminate-thread "TerminateThread" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(dw-exit-code :ulong))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:!=
+(get-exit-code-thread (:pointer (:struct getexitcodethread)))
+(h-thread :int64)
+(lp-exit-code (:pointer :int32)))
+
+(cffi:defcfun (get-thread-selector-entry "GetThreadSelectorEntry" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(dw-selector :ulong)
+(lp-selector-entry (:pointer (:struct lpldt_entry))))
+
+(cffi:defcfun (set-thread-execution-state "SetThreadExecutionState" :convention :stdcall :library "user32.dll")
+:EXECUTION_STATE
+(es-flags (:pointer (:struct execution_state))))
+
+(cffi:defcfun (power-create-request "PowerCreateRequest" :convention :stdcall :library "user32.dll")
+:int64
+(context (:pointer (:struct preason_context))))
+
+(cffi:defcfun (power-set-request "PowerSetRequest" :convention :stdcall :library "user32.dll")
+:int
+(power-request :int64)
+(request-type (:pointer (:struct power_request_type))))
+
+(cffi:defcfun (power-clear-request "PowerClearRequest" :convention :stdcall :library "user32.dll")
+:int
+(power-request :int64)
+(request-type (:pointer (:struct power_request_type))))
+
+(cffi:defcfun (get-last-error "GetLastError" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (set-last-error "SetLastError" :convention :stdcall :library "user32.dll")
+:void
+(dw-err-code :ulong))
+
+(cffi:defcfun (restore-last-error "RestoreLastError" :convention :stdcall :library "user32.dll")
+:void
+(dw-err-code :ulong))
+
+(cffi:defcfun (get-overlapped-result "GetOverlappedResult" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-overlapped (:pointer (:struct lpoverlapped)))
+(lp-number-of-bytes-transferred (:pointer :int32))
+(b-wait :int))
+
+(cffi:defcfun (create-io-completion-port "CreateIoCompletionPort" :convention :stdcall :library "user32.dll")
+:int64
+(file-handle :int64)
+(existing-completion-port :int64)
+(completion-key :uint64)
+(number-of-concurrent-threads :ulong))
+
+(cffi:defcfun (get-queued-completion-status "GetQueuedCompletionStatus" :convention :stdcall :library "user32.dll")
+:int
+(completion-port :int64)
+(lp-number-of-bytes-transferred (:pointer :int32))
+(lp-completion-key (:pointer :uint64))
+(lp-overlapped (:pointer (:struct lpoverlapped)))
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (get-queued-completion-status-ex "GetQueuedCompletionStatusEx" :convention :stdcall :library "user32.dll")
+:int
+(completion-port :int64)
+(ul-count :ulong)
+(ul-num-entries-removed (:pointer :ulong))
+(dw-milliseconds :ulong)
+(f-alertable :int))
+
+(cffi:defcfun (post-queued-completion-status "PostQueuedCompletionStatus" :convention :stdcall :library "user32.dll")
+:int
+(completion-port :int64)
+(dw-number-of-bytes-transferred :ulong)
+(dw-completion-key :uint64)
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (set-file-completion-notification-modes "SetFileCompletionNotificationModes" :convention :stdcall :library "user32.dll")
+:int
+(file-handle :int64)
+(flags :uchar))
+
+(cffi:defcfun (set-file-io-overlapped-range "SetFileIoOverlappedRange" :convention :stdcall :library "user32.dll")
+:int
+(file-handle :int64)
+(overlapped-range-start (:pointer :uchar))
+(length :ulong))
+
+(cffi:defcfun (get-error-mode "GetErrorMode" :convention :stdcall :library "user32.dll")
+:uint
+(void :void))
+
+(cffi:defcfun (set-error-mode "SetErrorMode" :convention :stdcall :library "user32.dll")
+:uint
+(u-mode :uint))
+
+(cffi:defcfun (get-thread-error-mode "GetThreadErrorMode" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (set-thread-error-mode "SetThreadErrorMode" :convention :stdcall :library "user32.dll")
+:int
+(dw-new-mode :ulong)
+(lp-old-mode (:pointer :int32)))
+
+(cffi:defcfun (read-process-memory "ReadProcessMemory" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-base-address (:pointer :void))
+(n-size :uint64)
+(lp-number-of-bytes-read :uint64))
+
+(cffi:defcfun (write-process-memory "WriteProcessMemory" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(lp-base-address (:pointer :void))
+(lp-buffer (:pointer :void))
+(n-size :uint64)
+(lp-number-of-bytes-written :uint64))
+
+(cffi:defcfun (get-thread-context "GetThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-context (:pointer (:struct lpcontext))))
+
+(cffi:defcfun (set-thread-context "SetThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-context (:pointer (:struct context))))
+
+(cffi:defcfun (wow64-get-thread-context "Wow64GetThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-context (:pointer (:struct pwow64_context))))
+
+(cffi:defcfun (wow64-get-thread-selector-entry "Wow64GetThreadSelectorEntry" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(dw-selector :ulong)
+(lp-selector-entry (:pointer (:struct pwow64_ldt_entry))))
+
+(cffi:defcfun (wow64-set-thread-context "Wow64SetThreadContext" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64)
+(lp-context (:pointer (:struct wow64_context))))
+
+(cffi:defcfun (suspend-thread "SuspendThread" :convention :stdcall :library "user32.dll")
+:ulong
+(h-thread :int64))
+
+(cffi:defcfun (wow64-suspend-thread "Wow64SuspendThread" :convention :stdcall :library "user32.dll")
+:ulong
+(h-thread :int64))
+
+(cffi:defcfun (resume-thread "ResumeThread" :convention :stdcall :library "user32.dll")
+:ulong
+(h-thread :int64))
+
+(cffi:defcfun (queue-user-apc "QueueUserAPC" :convention :stdcall :library "user32.dll")
+:ulong
+(pfn-apc (:pointer (:struct papcfunc)))
+(h-thread :int64)
+(dw-data :uint64))
+
+(cffi:defcfun (is-debugger-present "IsDebuggerPresent" :convention :stdcall :library "user32.dll")
+:int
+(void :void))
+
+(cffi:defcfun (check-remote-debugger-present "CheckRemoteDebuggerPresent" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(pb-debugger-present (:pointer :int)))
+
+(cffi:defcfun (debug-break "DebugBreak" :convention :stdcall :library "user32.dll")
+:void
+(void :void))
+
+(cffi:defcfun (wait-for-debug-event "WaitForDebugEvent" :convention :stdcall :library "user32.dll")
+:int
+(lp-debug-event (:pointer (:struct lpdebug_event)))
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (continue-debug-event "ContinueDebugEvent" :convention :stdcall :library "user32.dll")
+:int
+(dw-process-id :ulong)
+(dw-thread-id :ulong)
+(dw-continue-status :ulong))
+
+(cffi:defcfun (debug-active-process "DebugActiveProcess" :convention :stdcall :library "user32.dll")
+:int
+(dw-process-id :ulong))
+
+(cffi:defcfun (debug-active-process-stop "DebugActiveProcessStop" :convention :stdcall :library "user32.dll")
+:int
+(dw-process-id :ulong))
+
+(cffi:defcfun (debug-set-process-kill-on-exit "DebugSetProcessKillOnExit" :convention :stdcall :library "user32.dll")
+:int
+(kill-on-exit :int))
+
+(cffi:defcfun (debug-break-process "DebugBreakProcess" :convention :stdcall :library "user32.dll")
+:int
+(process :int64))
+
+(cffi:defcfun (initialize-critical-section "InitializeCriticalSection" :convention :stdcall :library "user32.dll")
+:void
+(lp-critical-section (:pointer (:struct lpcritical_section))))
+
+(cffi:defcfun (enter-critical-section "EnterCriticalSection" :convention :stdcall :library "user32.dll")
+:void
+(lp-critical-section (:pointer (:struct lpcritical_section))))
+
+(cffi:defcfun (leave-critical-section "LeaveCriticalSection" :convention :stdcall :library "user32.dll")
+:void
+(lp-critical-section (:pointer (:struct lpcritical_section))))
+
+(cffi:defcfun (initialize-critical-section-and-spin-count "InitializeCriticalSectionAndSpinCount" :convention :stdcall :library "user32.dll")
+:int
+(lp-critical-section (:pointer (:struct lpcritical_section)))
+(dw-spin-count :ulong))
+
+(cffi:defcfun (initialize-critical-section-ex "InitializeCriticalSectionEx" :convention :stdcall :library "user32.dll")
+:int
+(lp-critical-section (:pointer (:struct lpcritical_section)))
+(dw-spin-count :ulong)
+(flags :ulong))
+
+(cffi:defcfun (set-critical-section-spin-count "SetCriticalSectionSpinCount" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-critical-section (:pointer (:struct lpcritical_section)))
+(dw-spin-count :ulong))
+
+(cffi:defcfun (try-enter-critical-section "TryEnterCriticalSection" :convention :stdcall :library "user32.dll")
+:int
+(lp-critical-section (:pointer (:struct lpcritical_section))))
+
+(cffi:defcfun (delete-critical-section "DeleteCriticalSection" :convention :stdcall :library "user32.dll")
+:void
+(lp-critical-section (:pointer (:struct lpcritical_section))))
+
+(cffi:defcfun (set-event "SetEvent" :convention :stdcall :library "user32.dll")
+:int
+(h-event :int64))
+
+(cffi:defcfun (reset-event "ResetEvent" :convention :stdcall :library "user32.dll")
+:int
+(h-event :int64))
+
+(cffi:defcfun (pulse-event "PulseEvent" :convention :stdcall :library "user32.dll")
+:int
+(h-event :int64))
+
+(cffi:defcfun (release-semaphore "ReleaseSemaphore" :convention :stdcall :library "user32.dll")
+:int
+(h-semaphore :int64)
+(l-release-count :long)
+(lp-previous-count (:pointer :long)))
+
+(cffi:defcfun (release-mutex "ReleaseMutex" :convention :stdcall :library "user32.dll")
+:int
+(h-mutex :int64))
+
+(cffi:defcfun (wait-for-single-object "WaitForSingleObject" :convention :stdcall :library "user32.dll")
+:ulong
+(h-handle :int64)
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (wait-for-multiple-objects "WaitForMultipleObjects" :convention :stdcall :library "user32.dll")
+:ulong
+(n-count :ulong)
+(lp-handles :int64)
+(b-wait-all :int)
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (sleep "Sleep" :convention :stdcall :library "user32.dll")
+:void
+(dw-milliseconds :ulong))
+
+(cffi:defcfun (load-resource "LoadResource" :convention :stdcall :library "user32.dll")
+:handle
+(h-module :handle)
+(h-res-info :handle))
+
+(cffi:defcfun (sizeof-resource "SizeofResource" :convention :stdcall :library "user32.dll")
+:ulong
+(h-module :handle)
+(h-res-info :handle))
+
+(cffi:defcfun (global-delete-atom "GlobalDeleteAtom" :convention :stdcall :library "user32.dll")
+:int16
+(n-atom :int16))
+
+(cffi:defcfun (init-atom-table "InitAtomTable" :convention :stdcall :library "user32.dll")
+:int
+(n-size :ulong))
+
+(cffi:defcfun (delete-atom "DeleteAtom" :convention :stdcall :library "user32.dll")
+:int16
+(n-atom :int16))
+
+(cffi:defcfun (set-handle-count "SetHandleCount" :convention :stdcall :library "user32.dll")
+:uint
+(u-number :uint))
+
+(cffi:defcfun (get-logical-drives "GetLogicalDrives" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (lock-file "LockFile" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-file-offset-low :ulong)
+(dw-file-offset-high :ulong)
+(n-number-of-bytes-to-lock-low :ulong)
+(n-number-of-bytes-to-lock-high :ulong))
+
+(cffi:defcfun (unlock-file "UnlockFile" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-file-offset-low :ulong)
+(dw-file-offset-high :ulong)
+(n-number-of-bytes-to-unlock-low :ulong)
+(n-number-of-bytes-to-unlock-high :ulong))
+
+(cffi:defcfun (lock-file-ex "LockFileEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-flags :ulong)
+(dw-reserved :ulong)
+(n-number-of-bytes-to-lock-low :ulong)
+(n-number-of-bytes-to-lock-high :ulong)
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (unlock-file-ex "UnlockFileEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-reserved :ulong)
+(n-number-of-bytes-to-unlock-low :ulong)
+(n-number-of-bytes-to-unlock-high :ulong)
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (get-file-information-by-handle "GetFileInformationByHandle" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-file-information (:pointer (:struct lpby_handle_file_information))))
+
+(cffi:defcfun (get-file-type "GetFileType" :convention :stdcall :library "user32.dll")
+:ulong
+(h-file :int64))
+
+(cffi:defcfun (get-file-size "GetFileSize" :convention :stdcall :library "user32.dll")
+:ulong
+(h-file :int64)
+(lp-file-size-high (:pointer :int32)))
+
+(cffi:defcfun (get-file-size-ex "GetFileSizeEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-file-size (:pointer (:struct plarge_integer))))
+
+(cffi:defcfun (get-std-handle "GetStdHandle" :convention :stdcall :library "user32.dll")
+:int64
+(n-std-handle :ulong))
+
+(cffi:defcfun (set-std-handle "SetStdHandle" :convention :stdcall :library "user32.dll")
+:int
+(n-std-handle :ulong)
+(h-handle :int64))
+
+(cffi:defcfun (set-std-handle-ex "SetStdHandleEx" :convention :stdcall :library "user32.dll")
+:int
+(n-std-handle :ulong)
+(h-handle :int64)
+(ph-prev-value (:pointer :handle)))
+
+(cffi:defcfun (write-file "WriteFile" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-buffer (:pointer :void))
+(n-number-of-bytes-to-write :ulong)
+(lp-number-of-bytes-written (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (read-file "ReadFile" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(n-number-of-bytes-to-read :ulong)
+(lp-number-of-bytes-read (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (flush-file-buffers "FlushFileBuffers" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64))
+
+(cffi:defcfun (device-io-control "DeviceIoControl" :convention :stdcall :library "user32.dll")
+:int
+(h-device :int64)
+(dw-io-control-code :ulong)
+(lp-in-buffer (:pointer :void))
+(n-in-buffer-size :ulong)
+(n-out-buffer-size :ulong)
+(lp-bytes-returned (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (request-device-wakeup "RequestDeviceWakeup" :convention :stdcall :library "user32.dll")
+:int
+(h-device :int64))
+
+(cffi:defcfun (cancel-device-wakeup-request "CancelDeviceWakeupRequest" :convention :stdcall :library "user32.dll")
+:int
+(h-device :int64))
+
+(cffi:defcfun (get-device-power-state "GetDevicePowerState" :convention :stdcall :library "user32.dll")
+:int
+(h-device :int64)
+(pf-on :int))
+
+(cffi:defcfun (set-message-waiting-indicator "SetMessageWaitingIndicator" :convention :stdcall :library "user32.dll")
+:int
+(h-msg-indicator :int64)
+(ul-msg-count :ulong))
+
+(cffi:defcfun (set-end-of-file "SetEndOfFile" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64))
+
+(cffi:defcfun (set-file-pointer "SetFilePointer" :convention :stdcall :library "user32.dll")
+:ulong
+(h-file :int64)
+(l-distance-to-move :long)
+(lp-distance-to-move-high (:pointer :long))
+(dw-move-method :ulong))
+
+(cffi:defcfun (set-file-pointer-ex "SetFilePointerEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(li-distance-to-move (:pointer (:struct large_integer)))
+(lp-new-file-pointer (:pointer (:struct plarge_integer)))
+(dw-move-method :ulong))
+
+(cffi:defcfun (find-close "FindClose" :convention :stdcall :library "user32.dll")
+:int
+(h-find-file :int64))
+
+(cffi:defcfun (get-file-time "GetFileTime" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-creation-time (:pointer (:struct lpfiletime)))
+(lp-last-access-time (:pointer (:struct lpfiletime)))
+(lp-last-write-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (set-file-time "SetFileTime" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-creation-time (:pointer (:struct filetime)))
+(lp-last-access-time (:pointer (:struct filetime)))
+(lp-last-write-time (:pointer (:struct filetime))))
+
+(cffi:defcfun (set-file-valid-data "SetFileValidData" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(valid-data-length :int64))
+
+(cffi:defcfun (set-file-short-name "SetFileShortNameW" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-short-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (close-handle "CloseHandle" :convention :stdcall :library "user32.dll")
+:int
+(h-object :int64))
+
+(cffi:defcfun (duplicate-handle "DuplicateHandle" :convention :stdcall :library "user32.dll")
+:int
+(h-source-process-handle :int64)
+(h-source-handle :int64)
+(h-target-process-handle :int64)
+(lp-target-handle (:pointer :handle))
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(dw-options :ulong))
+
+(cffi:defcfun (get-handle-information "GetHandleInformation" :convention :stdcall :library "user32.dll")
+:int
+(h-object :int64)
+(lpdw-flags (:pointer :int32)))
+
+(cffi:defcfun (set-handle-information "SetHandleInformation" :convention :stdcall :library "user32.dll")
+:int
+(h-object :int64)
+(dw-mask :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (load-module "LoadModule" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-module-name (:string :encoding :ascii))
+(lp-parameter-block (:pointer :void)))
+
+(cffi:defcfun (win-exec "WinExec" :convention :stdcall :library "user32.dll")
+:uint
+(lp-cmd-line (:string :encoding :ascii))
+(u-cmd-show :uint))
+
+(cffi:defcfun (clear-comm-break "ClearCommBreak" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64))
+
+(cffi:defcfun (clear-comm-error "ClearCommError" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-errors (:pointer :int32))
+(lp-stat (:pointer (:struct lpcomstat))))
+
+(cffi:defcfun (setup-comm "SetupComm" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-in-queue :ulong)
+(dw-out-queue :ulong))
+
+(cffi:defcfun (escape-comm-function "EscapeCommFunction" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-func :ulong))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:==
+(get-comm-config (:pointer (:struct getcommconfig)))
+(h-comm-dev :int64)
+(lp-cc (:pointer (:struct lpcommconfig)))
+(lpdw-size (:pointer :int32)))
+
+(cffi:defcfun (get-comm-mask "GetCommMask" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-evt-mask (:pointer :int32)))
+
+(cffi:defcfun (get-comm-properties "GetCommProperties" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-comm-prop (:pointer (:struct lpcommprop))))
+
+(cffi:defcfun (get-comm-modem-status "GetCommModemStatus" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-modem-stat (:pointer :int32)))
+
+(cffi:defcfun (get-comm-state "GetCommState" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-dcb (:pointer (:struct lpdcb))))
+
+(cffi:defcfun (get-comm-timeouts "GetCommTimeouts" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-comm-timeouts (:pointer (:struct lpcommtimeouts))))
+
+(cffi:defcfun (purge-comm "PurgeComm" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-flags :ulong))
+
+(cffi:defcfun (set-comm-break "SetCommBreak" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64))
+
+(cffi:defcfun (set-comm-config "SetCommConfig" :convention :stdcall :library "user32.dll")
+:int
+(h-comm-dev :int64)
+(lp-cc (:pointer (:struct lpcommconfig)))
+(dw-size :ulong))
+
+(cffi:defcfun (set-comm-mask "SetCommMask" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-evt-mask :ulong))
+
+(cffi:defcfun (set-comm-state "SetCommState" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-dcb (:pointer (:struct lpdcb))))
+
+(cffi:defcfun (set-comm-timeouts "SetCommTimeouts" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-comm-timeouts (:pointer (:struct lpcommtimeouts))))
+
+(cffi:defcfun (transmit-comm-char "TransmitCommChar" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(c-char :char))
+
+(cffi:defcfun (wait-comm-event "WaitCommEvent" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-evt-mask (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (set-tape-position "SetTapePosition" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-position-method :ulong)
+(dw-partition :ulong)
+(dw-offset-low :ulong)
+(dw-offset-high :ulong)
+(b-immediate :int))
+
+(cffi:defcfun (get-tape-position "GetTapePosition" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-position-type :ulong)
+(lpdw-partition (:pointer :int32))
+(lpdw-offset-low (:pointer :int32))
+(lpdw-offset-high (:pointer :int32)))
+
+(cffi:defcfun (prepare-tape "PrepareTape" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-operation :ulong)
+(b-immediate :int))
+
+(cffi:defcfun (erase-tape "EraseTape" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-erase-type :ulong)
+(b-immediate :int))
+
+(cffi:defcfun (create-tape-partition "CreateTapePartition" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-partition-method :ulong)
+(dw-count :ulong)
+(dw-size :ulong))
+
+(cffi:defcfun (write-tapemark "WriteTapemark" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-tapemark-type :ulong)
+(dw-tapemark-count :ulong)
+(b-immediate :int))
+
+(cffi:defcfun (get-tape-status "GetTapeStatus" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64))
+
+(cffi:defcfun (get-tape-parameters "GetTapeParameters" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-operation :ulong)
+(lpdw-size (:pointer :int32))
+(lp-tape-information (:pointer :void)))
+
+(cffi:defcfun (set-tape-parameters "SetTapeParameters" :convention :stdcall :library "user32.dll")
+:ulong
+(h-device :int64)
+(dw-operation :ulong)
+(lp-tape-information (:pointer :void)))
+
+(cffi:defcfun (beep "Beep" :convention :stdcall :library "user32.dll")
+:int
+(dw-freq :ulong)
+(dw-duration :ulong))
+
+(cffi:defcfun (mul-div "MulDiv" :convention :stdcall :library "user32.dll")
+:int
+(n-number :int)
+(n-numerator :int)
+(n-denominator :int))
+
+(cffi:defcfun (get-system-time "GetSystemTime" :convention :stdcall :library "user32.dll")
+:void
+(lp-system-time (:pointer (:struct lpsystemtime))))
+
+(cffi:defcfun (get-system-time-as-file-time "GetSystemTimeAsFileTime" :convention :stdcall :library "user32.dll")
+:void
+(lp-system-time-as-file-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (set-system-time "SetSystemTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-system-time (:pointer (:struct systemtime))))
+
+(cffi:defcfun (get-local-time "GetLocalTime" :convention :stdcall :library "user32.dll")
+:void
+(lp-system-time (:pointer (:struct lpsystemtime))))
+
+(cffi:defcfun (set-local-time "SetLocalTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-system-time (:pointer (:struct systemtime))))
+
+(cffi:defcfun (get-system-info "GetSystemInfo" :convention :stdcall :library "user32.dll")
+:void
+(lp-system-info (:pointer (:struct lpsystem_info))))
+
+(cffi:defcfun (get-system-dep-policy "GetSystemDEPPolicy" :convention :stdcall :library "user32.dll")
+:DEP_SYSTEM_POLICY_TYPE
+(void :void))
+
+(cffi:defcfun (set-system-file-cache-size "SetSystemFileCacheSize" :convention :stdcall :library "user32.dll")
+:int
+(minimum-file-cache-size :uint64)
+(maximum-file-cache-size :uint64)
+(flags :ulong))
+
+(cffi:defcfun (get-system-file-cache-size "GetSystemFileCacheSize" :convention :stdcall :library "user32.dll")
+:int
+(lp-minimum-file-cache-size (:pointer :uint64))
+(lp-maximum-file-cache-size (:pointer :uint64))
+(lp-flags (:pointer :int32)))
+
+(cffi:defcfun (get-system-registry-quota "GetSystemRegistryQuota" :convention :stdcall :library "user32.dll")
+:int
+(pdw-quota-allowed (:pointer :int32))
+(pdw-quota-used (:pointer :int32)))
+
+(cffi:defcfun (get-native-system-info "GetNativeSystemInfo" :convention :stdcall :library "user32.dll")
+:void
+(lp-system-info (:pointer (:struct lpsystem_info))))
+
+(cffi:defcfun (is-processor-feature-present "IsProcessorFeaturePresent" :convention :stdcall :library "user32.dll")
+:int
+(processor-feature :ulong))
+
+(cffi:defcfun (system-time-to-tz-specific-local-time "SystemTimeToTzSpecificLocalTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-time-zone-information (:pointer (:struct time_zone_information)))
+(lp-universal-time (:pointer (:struct systemtime)))
+(lp-local-time (:pointer (:struct lpsystemtime))))
+
+(cffi:defcfun (tz-specific-local-time-to-system-time "TzSpecificLocalTimeToSystemTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-time-zone-information (:pointer (:struct time_zone_information)))
+(lp-local-time (:pointer (:struct systemtime)))
+(lp-universal-time (:pointer (:struct lpsystemtime))))
+
+(cffi:defcfun (get-time-zone-information "GetTimeZoneInformation" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-time-zone-information (:pointer (:struct lptime_zone_information))))
+
+(cffi:defcfun (set-time-zone-information "SetTimeZoneInformation" :convention :stdcall :library "user32.dll")
+:int
+(lp-time-zone-information (:pointer (:struct time_zone_information))))
+
+(cffi:defcfun (get-dynamic-time-zone-information "GetDynamicTimeZoneInformation" :convention :stdcall :library "user32.dll")
+:ulong
+(p-time-zone-information (:pointer (:struct pdynamic_time_zone_information))))
+
+(cffi:defcfun (set-dynamic-time-zone-information "SetDynamicTimeZoneInformation" :convention :stdcall :library "user32.dll")
+:int
+(lp-time-zone-information (:pointer (:struct dynamic_time_zone_information))))
+
+(cffi:defcfun (system-time-to-file-time "SystemTimeToFileTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-system-time (:pointer (:struct systemtime)))
+(lp-file-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (file-time-to-local-file-time "FileTimeToLocalFileTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-time (:pointer (:struct filetime)))
+(lp-local-file-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (local-file-time-to-file-time "LocalFileTimeToFileTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-local-file-time (:pointer (:struct filetime)))
+(lp-file-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (file-time-to-system-time "FileTimeToSystemTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-time (:pointer (:struct filetime)))
+(lp-system-time (:pointer (:struct lpsystemtime))))
+
+(cffi:defcfun (compare-file-time "CompareFileTime" :convention :stdcall :library "user32.dll")
+:long
+(lp-file-time1 (:pointer (:struct filetime)))
+(lp-file-time2 (:pointer (:struct filetime))))
+
+(cffi:defcfun (file-time-to-dos-date-time "FileTimeToDosDateTime" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-time (:pointer (:struct filetime)))
+(lp-fat-date (:pointer :int16))
+(lp-fat-time (:pointer :int16)))
+
+(cffi:defcfun (dos-date-time-to-file-time "DosDateTimeToFileTime" :convention :stdcall :library "user32.dll")
+:int
+(w-fat-date :ushort)
+(w-fat-time :ushort)
+(lp-file-time (:pointer (:struct lpfiletime))))
+
+(cffi:defcfun (get-tick-count "GetTickCount" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (get-tick-count64 "GetTickCount64" :convention :stdcall :library "user32.dll")
+:uint64
+(void :void))
+
+(cffi:defcfun (set-system-time-adjustment "SetSystemTimeAdjustment" :convention :stdcall :library "user32.dll")
+:int
+(dw-time-adjustment :ulong)
+(b-time-adjustment-disabled :int))
+
+(cffi:defcfun (get-system-time-adjustment "GetSystemTimeAdjustment" :convention :stdcall :library "user32.dll")
+:int
+(lp-time-adjustment (:pointer :int32))
+(lp-time-increment (:pointer :int32))
+(lp-time-adjustment-disabled (:pointer :int)))
+
+(cffi:defcfun (format-message "FormatMessageW" :convention :stdcall :library "user32.dll")
+:ulong
+(dw-flags :ulong)
+(lp-source (:pointer :void))
+(dw-message-id :ulong)
+(dw-language-id :ulong)
+(lp-buffer (:string :encoding :utf-16le))
+(n-size :ulong)
+(arguments (:pointer (:struct va_list))))
+
+(cffi:defcfun (create-pipe "CreatePipe" :convention :stdcall :library "user32.dll")
+:int
+(h-read-pipe (:pointer :handle))
+(h-write-pipe (:pointer :handle))
+(lp-pipe-attributes (:pointer (:struct lpsecurity_attributes)))
+(n-size :ulong))
+
+(cffi:defcfun (connect-named-pipe "ConnectNamedPipe" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (disconnect-named-pipe "DisconnectNamedPipe" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64))
+
+(cffi:defcfun (set-named-pipe-handle-state "SetNamedPipeHandleState" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(lp-mode (:pointer :int32))
+(lp-max-collection-count (:pointer :int32))
+(lp-collect-data-timeout (:pointer :int32)))
+
+(cffi:defcfun (get-named-pipe-info "GetNamedPipeInfo" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(lp-flags (:pointer :int32))
+(lp-out-buffer-size (:pointer :int32))
+(lp-in-buffer-size (:pointer :int32))
+(lp-max-instances (:pointer :int32)))
+
+(cffi:defcfun (peek-named-pipe "PeekNamedPipe" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(n-buffer-size :ulong)
+(lp-bytes-read (:pointer :int32))
+(lp-total-bytes-avail (:pointer :int32))
+(lp-bytes-left-this-message (:pointer :int32)))
+
+(cffi:defcfun (transact-named-pipe "TransactNamedPipe" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(lp-in-buffer (:pointer :void))
+(n-in-buffer-size :ulong)
+(n-out-buffer-size :ulong)
+(lp-bytes-read (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (create-mailslot "CreateMailslotW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-name (:string :encoding :utf-16le))
+(n-max-message-size :ulong)
+(l-read-timeout :ulong)
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes))))
+
+(cffi:defcfun (get-mailslot-info "GetMailslotInfo" :convention :stdcall :library "user32.dll")
+:int
+(h-mailslot :int64)
+(lp-max-message-size (:pointer :int32))
+(lp-next-size (:pointer :int32))
+(lp-message-count (:pointer :int32))
+(lp-read-timeout (:pointer :int32)))
+
+(cffi:defcfun (set-mailslot-info "SetMailslotInfo" :convention :stdcall :library "user32.dll")
+:int
+(h-mailslot :int64)
+(l-read-timeout :ulong))
+
+(cffi:defcfun (map-view-of-file "MapViewOfFile" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-file-mapping-object :int64)
+(dw-desired-access :ulong)
+(dw-file-offset-high :ulong)
+(dw-file-offset-low :ulong)
+(dw-number-of-bytes-to-map :uint64))
+
+(cffi:defcfun (flush-view-of-file "FlushViewOfFile" :convention :stdcall :library "user32.dll")
+:int
+(lp-base-address (:pointer :void))
+(dw-number-of-bytes-to-flush :uint64))
+
+(cffi:defcfun (unmap-view-of-file "UnmapViewOfFile" :convention :stdcall :library "user32.dll")
+:int
+(lp-base-address (:pointer :void)))
+
+(cffi:defcfun (lstrcmp "lstrcmpW" :convention :stdcall :library "user32.dll")
+:int
+(lp-string1 (:string :encoding :utf-16le))
+(lp-string2 (:string :encoding :utf-16le)))
+
+(cffi:defcfun (lstrcmpi "lstrcmpiW" :convention :stdcall :library "user32.dll")
+:int
+(lp-string1 (:string :encoding :utf-16le))
+(lp-string2 (:string :encoding :utf-16le)))
+
+(cffi:defcfun (lstrcpyn "lstrcpynW" :convention :stdcall :library "user32.dll")
+(:string :encoding :utf-16le)
+(lp-string1 (:string :encoding :utf-16le))
+(lp-string2 (:string :encoding :utf-16le))
+(i-max-length :int))
+
+(cffi:defcfun (lstrcpy "lstrcpyW" :convention :stdcall :library "user32.dll")
+(:string :encoding :utf-16le)
+(lp-string1 (:string :encoding :utf-16le))
+(lp-string2 (:string :encoding :utf-16le)))
+
+(cffi:defcfun (lstrcat "lstrcatW" :convention :stdcall :library "user32.dll")
+(:string :encoding :utf-16le)
+(lp-string1 (:string :encoding :utf-16le))
+(lp-string2 (:string :encoding :utf-16le)))
+
+(cffi:defcfun (lstrlen "lstrlenW" :convention :stdcall :library "user32.dll")
+:int
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-file "OpenFile" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :ascii))
+(lp-re-open-buff (:pointer (:struct lpofstruct)))
+(u-style :uint))
+
+(cffi:defcfun (_lopen "_lopen" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :ascii))
+(i-read-write :int))
+
+(cffi:defcfun (_lcreat "_lcreat" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :ascii))
+(i-attribute :int))
+
+(cffi:defcfun (_lread "_lread" :convention :stdcall :library "user32.dll")
+:uint
+(h-file :int)
+(u-bytes :uint))
+
+(cffi:defcfun (_lwrite "_lwrite" :convention :stdcall :library "user32.dll")
+:uint
+(h-file :int)
+(lp-buffer (:pointer (:struct lpcch)))
+(u-bytes :uint))
+
+(cffi:defcfun (_hread "_hread" :convention :stdcall :library "user32.dll")
+:long
+(h-file :int)
+(l-bytes :long))
+
+(cffi:defcfun (_hwrite "_hwrite" :convention :stdcall :library "user32.dll")
+:long
+(h-file :int)
+(lp-buffer (:pointer (:struct lpcch)))
+(l-bytes :long))
+
+(cffi:defcfun (_lclose "_lclose" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int))
+
+(cffi:defcfun (_llseek "_llseek" :convention :stdcall :library "user32.dll")
+:long
+(h-file :int)
+(l-offset :long)
+(i-origin :int))
+
+(cffi:defcfun (fls-alloc "FlsAlloc" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-callback (:pointer (:struct pfls_callback_function))))
+
+(cffi:defcfun (fls-get-value "FlsGetValue" :convention :stdcall :library "user32.dll")
+(:string :void)
+(dw-fls-index :ulong))
+
+(cffi:defcfun (fls-set-value "FlsSetValue" :convention :stdcall :library "user32.dll")
+:int
+(dw-fls-index :ulong)
+(lp-fls-data (:string :void)))
+
+(cffi:defcfun (fls-free "FlsFree" :convention :stdcall :library "user32.dll")
+:int
+(dw-fls-index :ulong))
+
+(cffi:defcfun (tls-alloc "TlsAlloc" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (tls-get-value "TlsGetValue" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(dw-tls-index :ulong))
+
+(cffi:defcfun (tls-set-value "TlsSetValue" :convention :stdcall :library "user32.dll")
+:int
+(dw-tls-index :ulong)
+(lp-tls-value (:pointer :void)))
+
+(cffi:defcfun (tls-free "TlsFree" :convention :stdcall :library "user32.dll")
+:int
+(dw-tls-index :ulong))
+
+(cffi:defcfun (sleep-ex "SleepEx" :convention :stdcall :library "user32.dll")
+:ulong
+(dw-milliseconds :ulong)
+(b-alertable :int))
+
+(cffi:defcfun (wait-for-single-object-ex "WaitForSingleObjectEx" :convention :stdcall :library "user32.dll")
+:ulong
+(h-handle :int64)
+(dw-milliseconds :ulong)
+(b-alertable :int))
+
+(cffi:defcfun (wait-for-multiple-objects-ex "WaitForMultipleObjectsEx" :convention :stdcall :library "user32.dll")
+:ulong
+(n-count :ulong)
+(lp-handles :int64)
+(b-wait-all :int)
+(dw-milliseconds :ulong)
+(b-alertable :int))
+
+(cffi:defcfun (signal-object-and-wait "SignalObjectAndWait" :convention :stdcall :library "user32.dll")
+:ulong
+(h-object-to-signal :int64)
+(h-object-to-wait-on :int64)
+(dw-milliseconds :ulong)
+(b-alertable :int))
+
+(cffi:defcfun (read-file-ex "ReadFileEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-buffer (:pointer :void))
+(n-number-of-bytes-to-read :ulong)
+(lp-overlapped (:pointer (:struct lpoverlapped)))
+(lp-completion-routine (:pointer (:struct lpoverlapped_completion_routine))))
+
+(cffi:defcfun (write-file-ex "WriteFileEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-buffer (:pointer :void))
+(n-number-of-bytes-to-write :ulong)
+(lp-overlapped (:pointer (:struct lpoverlapped)))
+(lp-completion-routine (:pointer (:struct lpoverlapped_completion_routine))))
+
+(cffi:defcfun (backup-read "BackupRead" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(n-number-of-bytes-to-read :ulong)
+(lp-number-of-bytes-read (:pointer :int32))
+(b-abort :int)
+(b-process-security :int)
+(lp-context (:pointer :void)))
+
+(cffi:defcfun (backup-seek "BackupSeek" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(dw-low-bytes-to-seek :ulong)
+(dw-high-bytes-to-seek :ulong)
+(lpdw-low-byte-seeked (:pointer :int32))
+(lpdw-high-byte-seeked (:pointer :int32))
+(lp-context (:pointer :void)))
+
+(cffi:defcfun (backup-write "BackupWrite" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-buffer (:pointer :uchar))
+(n-number-of-bytes-to-write :ulong)
+(lp-number-of-bytes-written (:pointer :int32))
+(b-abort :int)
+(b-process-security :int)
+(lp-context (:pointer :void)))
+
+(cffi:defcfun (read-file-scatter "ReadFileScatter" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(a-segment-array[] (:pointer (:struct file_segment_element)))
+(n-number-of-bytes-to-read :ulong)
+(lp-reserved (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (write-file-gather "WriteFileGather" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(a-segment-array[] (:pointer (:struct file_segment_element)))
+(n-number-of-bytes-to-write :ulong)
+(lp-reserved (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (create-mutex "CreateMutexW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-mutex-attributes (:pointer (:struct lpsecurity_attributes)))
+(b-initial-owner :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-mutex "OpenMutexW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (create-event "CreateEventW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-event-attributes (:pointer (:struct lpsecurity_attributes)))
+(b-manual-reset :int)
+(b-initial-state :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-event "OpenEventW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (create-semaphore "CreateSemaphoreW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-semaphore-attributes (:pointer (:struct lpsecurity_attributes)))
+(l-initial-count :long)
+(l-maximum-count :long)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-semaphore "OpenSemaphoreW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (create-waitable-timer "CreateWaitableTimerW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-timer-attributes (:pointer (:struct lpsecurity_attributes)))
+(b-manual-reset :int)
+(lp-timer-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-waitable-timer "OpenWaitableTimerW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-timer-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (set-waitable-timer "SetWaitableTimer" :convention :stdcall :library "user32.dll")
+:int
+(h-timer :int64)
+(lp-due-time (:pointer (:struct large_integer)))
+(l-period :long)
+(pfn-completion-routine (:pointer (:struct ptimerapcroutine)))
+(lp-arg-to-completion-routine (:pointer :void))
+(f-resume :int))
+
+(cffi:defcfun (cancel-waitable-timer "CancelWaitableTimer" :convention :stdcall :library "user32.dll")
+:int
+(h-timer :int64))
+
+(cffi:defcfun (create-mutex-ex "CreateMutexExW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-mutex-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(dw-desired-access :ulong))
+
+(cffi:defcfun (create-event-ex "CreateEventExW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-event-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(dw-desired-access :ulong))
+
+(cffi:defcfun (create-semaphore-ex "CreateSemaphoreExW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-semaphore-attributes (:pointer (:struct lpsecurity_attributes)))
+(l-initial-count :long)
+(l-maximum-count :long)
+(lp-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(dw-desired-access :ulong))
+
+(cffi:defcfun (create-waitable-timer-ex "CreateWaitableTimerExW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-timer-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-timer-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(dw-desired-access :ulong))
+
+(cffi:defcfun (create-file-mapping "CreateFileMappingW" :convention :stdcall :library "user32.dll")
+:int64
+(h-file :int64)
+(lp-file-mapping-attributes (:pointer (:struct lpsecurity_attributes)))
+(fl-protect :ulong)
+(dw-maximum-size-high :ulong)
+(dw-maximum-size-low :ulong)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (create-file-mapping-numa "CreateFileMappingNumaW" :convention :stdcall :library "user32.dll")
+:int64
+(h-file :int64)
+(lp-file-mapping-attributes (:pointer (:struct lpsecurity_attributes)))
+(fl-protect :ulong)
+(dw-maximum-size-high :ulong)
+(dw-maximum-size-low :ulong)
+(lp-name (:string :encoding :utf-16le))
+(nnd-preferred :ulong))
+
+(cffi:defcfun (open-file-mapping "OpenFileMappingW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-logical-drive-strings "GetLogicalDriveStringsW" :convention :stdcall :library "user32.dll")
+:ulong
+(n-buffer-length :ulong))
+
+(cffi:defcfun (create-memory-resource-notification "CreateMemoryResourceNotification" :convention :stdcall :library "user32.dll")
+:int64
+(notification-type (:pointer (:struct memory_resource_notification_type))))
+
+(cffi:defcfun (query-memory-resource-notification "QueryMemoryResourceNotification" :convention :stdcall :library "user32.dll")
+:int
+(resource-notification-handle :int64)
+(resource-state (:pointer :int)))
+
+(cffi:defcfun (load-library "LoadLibraryW" :convention :stdcall :library "user32.dll")
+:handle
+(lp-lib-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (load-library-ex "LoadLibraryExW" :convention :stdcall :library "user32.dll")
+:handle
+(lp-lib-file-name (:string :encoding :utf-16le))
+(h-file :int64)
+(dw-flags :ulong))
+
+(cffi:defcfun (get-module-file-name "GetModuleFileNameW" :convention :stdcall :library "user32.dll")
+:ulong
+(h-module :handle)
+(n-size :ulong))
+
+(cffi:defcfun (get-module-handle "GetModuleHandleW" :convention :stdcall :library "user32.dll")
+:handle
+(lp-module-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-module-handle-ex "GetModuleHandleExW" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(lp-module-name (:string :encoding :utf-16le))
+(ph-module :handle))
+
+(cffi:defcfun (need-current-directory-for-exe-path "NeedCurrentDirectoryForExePathW" :convention :stdcall :library "user32.dll")
+:int
+(exe-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (query-full-process-image-name "QueryFullProcessImageNameW" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-flags :ulong)
+(lpdw-size (:pointer :int32)))
+
+(cffi:defcfun (initialize-proc-thread-attribute-list "InitializeProcThreadAttributeList" :convention :stdcall :library "user32.dll")
+:int
+(lp-attribute-list (:pointer (:struct lpproc_thread_attribute_list)))
+(dw-attribute-count :ulong)
+(dw-flags :ulong)
+(lp-size (:pointer :uint64)))
+
+(cffi:defcfun (delete-proc-thread-attribute-list "DeleteProcThreadAttributeList" :convention :stdcall :library "user32.dll")
+:void
+(lp-attribute-list (:pointer (:struct lpproc_thread_attribute_list))))
+
+(cffi:defcfun (update-proc-thread-attribute "UpdateProcThreadAttribute" :convention :stdcall :library "user32.dll")
+:int
+(lp-attribute-list (:pointer (:struct lpproc_thread_attribute_list)))
+(dw-flags :ulong)
+(attribute :uint64)
+(lp-value (:string :void))
+(cb-size :uint64)
+(lp-previous-value (:string :void))
+(lp-return-size (:pointer :uint64)))
+
+(cffi:defcfun (create-process "CreateProcessW" :convention :stdcall :library "user32.dll")
+:int
+(lp-application-name (:string :encoding :utf-16le))
+(lp-command-line (:string :encoding :utf-16le))
+(lp-process-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-thread-attributes (:pointer (:struct lpsecurity_attributes)))
+(b-inherit-handles :int)
+(dw-creation-flags :ulong)
+(lp-environment (:pointer :void))
+(lp-current-directory (:string :encoding :utf-16le))
+(lp-startup-info (:pointer (:struct lpstartupinfow)))
+(lp-process-information (:pointer (:struct lpprocess_information))))
+
+(cffi:defcfun (set-process-shutdown-parameters "SetProcessShutdownParameters" :convention :stdcall :library "user32.dll")
+:int
+(dw-level :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (get-process-shutdown-parameters "GetProcessShutdownParameters" :convention :stdcall :library "user32.dll")
+:int
+(lpdw-level (:pointer :int32))
+(lpdw-flags (:pointer :int32)))
+
+(cffi:defcfun (get-process-version "GetProcessVersion" :convention :stdcall :library "user32.dll")
+:ulong
+(process-id :ulong))
+
+(cffi:defcfun (fatal-app-exit "FatalAppExitW" :convention :stdcall :library "user32.dll")
+:void
+(u-action :uint)
+(lp-message-text (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-startup-info "GetStartupInfoW" :convention :stdcall :library "user32.dll")
+:void
+(lp-startup-info (:pointer (:struct lpstartupinfow))))
+
+(cffi:defcfun (get-command-line "GetCommandLineW" :convention :stdcall :library "user32.dll")
+(:string :encoding :utf-16le)
+(void :void))
+
+(cffi:defcfun (dword "DWORD" :convention :stdcall :library "user32.dll")
+:<
+(winapi :convention :stdcall)
+(get-environment-variable-a (:pointer (:struct getenvironmentvariablea)))
+(lp-name (:string :encoding :ascii))
+(n-size :ulong))
+
+(cffi:defcfun (dword "DWORD" :convention :stdcall :library "user32.dll")
+:<
+(winapi :convention :stdcall)
+(get-environment-variable-w (:pointer (:struct getenvironmentvariablew)))
+(lp-name (:string :encoding :utf-16le))
+(n-size :ulong))
+
+(cffi:defcfun (set-environment-variable "SetEnvironmentVariableW" :convention :stdcall :library "user32.dll")
+:int
+(lp-name (:string :encoding :utf-16le))
+(lp-value (:string :encoding :utf-16le)))
+
+(cffi:defcfun (dword "DWORD" :convention :stdcall :library "user32.dll")
+:<=
+(winapi :convention :stdcall)
+(expand-environment-strings-a (:pointer (:struct expandenvironmentstringsa)))
+(lp-src (:string :encoding :ascii))
+(n-size :ulong))
+
+(cffi:defcfun (dword "DWORD" :convention :stdcall :library "user32.dll")
+:<=
+(winapi :convention :stdcall)
+(expand-environment-strings-w (:pointer (:struct expandenvironmentstringsw)))
+(lp-src (:string :encoding :utf-16le))
+(n-size :ulong))
+
+(cffi:defcfun (get-firmware-environment-variable "GetFirmwareEnvironmentVariableW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-name (:string :encoding :utf-16le))
+(lp-guid (:string :encoding :utf-16le))
+(n-size :ulong))
+
+(cffi:defcfun (set-firmware-environment-variable "SetFirmwareEnvironmentVariableW" :convention :stdcall :library "user32.dll")
+:int
+(lp-name (:string :encoding :utf-16le))
+(lp-guid (:string :encoding :utf-16le))
+(p-value (:string :void))
+(n-size :ulong))
+
+(cffi:defcfun (output-debug-string "OutputDebugStringW" :convention :stdcall :library "user32.dll")
+:void
+(lp-output-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (find-resource "FindResourceW" :convention :stdcall :library "user32.dll")
+:handle
+(h-module :handle)
+(lp-name (:string :encoding :utf-16le))
+(lp-type (:string :encoding :utf-16le)))
+
+(cffi:defcfun (find-resource-ex "FindResourceExW" :convention :stdcall :library "user32.dll")
+:handle
+(h-module :handle)
+(lp-type (:string :encoding :utf-16le))
+(lp-name (:string :encoding :utf-16le))
+(w-language :ushort))
+
+(cffi:defcfun (enum-resource-types "EnumResourceTypesW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-enum-func (:pointer (:struct enumrestypeprocw)))
+(l-param :long))
+
+(cffi:defcfun (enum-resource-names "EnumResourceNamesW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-type (:string :encoding :utf-16le))
+(lp-enum-func (:pointer (:struct enumresnameprocw)))
+(l-param :long))
+
+(cffi:defcfun (enum-resource-languages "EnumResourceLanguagesW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-type (:string :encoding :utf-16le))
+(lp-name (:string :encoding :utf-16le))
+(lp-enum-func (:pointer (:struct enumreslangprocw)))
+(l-param :long))
+
+(cffi:defcfun (enum-resource-types-ex "EnumResourceTypesExW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-enum-func (:pointer (:struct enumrestypeprocw)))
+(l-param :long)
+(dw-flags :ulong)
+(lang-id :int16))
+
+(cffi:defcfun (enum-resource-names-ex "EnumResourceNamesExW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-type (:string :encoding :utf-16le))
+(lp-enum-func (:pointer (:struct enumresnameprocw)))
+(l-param :long)
+(dw-flags :ulong)
+(lang-id :int16))
+
+(cffi:defcfun (enum-resource-languages-ex "EnumResourceLanguagesExW" :convention :stdcall :library "user32.dll")
+:int
+(h-module :handle)
+(lp-type (:string :encoding :utf-16le))
+(lp-name (:string :encoding :utf-16le))
+(lp-enum-func (:pointer (:struct enumreslangprocw)))
+(l-param :long)
+(dw-flags :ulong)
+(lang-id :int16))
+
+(cffi:defcfun (begin-update-resource "BeginUpdateResourceW" :convention :stdcall :library "user32.dll")
+:int64
+(p-file-name (:string :encoding :utf-16le))
+(b-delete-existing-resources :int))
+
+(cffi:defcfun (update-resource "UpdateResourceW" :convention :stdcall :library "user32.dll")
+:int
+(h-update :int64)
+(lp-type (:string :encoding :utf-16le))
+(lp-name (:string :encoding :utf-16le))
+(w-language :ushort)
+(lp-data (:pointer :void))
+(cb :ulong))
+
+(cffi:defcfun (end-update-resource "EndUpdateResourceW" :convention :stdcall :library "user32.dll")
+:int
+(h-update :int64)
+(f-discard :int))
+
+(cffi:defcfun (global-add-atom "GlobalAddAtomW" :convention :stdcall :library "user32.dll")
+:int16
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (global-find-atom "GlobalFindAtomW" :convention :stdcall :library "user32.dll")
+:int16
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (global-get-atom-name "GlobalGetAtomNameW" :convention :stdcall :library "user32.dll")
+:uint
+(n-atom :int16)
+(n-size :int))
+
+(cffi:defcfun (add-atom "AddAtomW" :convention :stdcall :library "user32.dll")
+:int16
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (find-atom "FindAtomW" :convention :stdcall :library "user32.dll")
+:int16
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-atom-name "GetAtomNameW" :convention :stdcall :library "user32.dll")
+:uint
+(n-atom :int16)
+(n-size :int))
+
+(cffi:defcfun (get-profile-int "GetProfileIntW" :convention :stdcall :library "user32.dll")
+:uint
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(n-default :int))
+
+(cffi:defcfun (get-profile-string "GetProfileStringW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(lp-default (:string :encoding :utf-16le))
+(n-size :ulong))
+
+(cffi:defcfun (write-profile-string "WriteProfileStringW" :convention :stdcall :library "user32.dll")
+:int
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-profile-section "GetProfileSectionW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-app-name (:string :encoding :utf-16le))
+(n-size :ulong))
+
+(cffi:defcfun (write-profile-section "WriteProfileSectionW" :convention :stdcall :library "user32.dll")
+:int
+(lp-app-name (:string :encoding :utf-16le))
+(lp-string (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-private-profile-int "GetPrivateProfileIntW" :convention :stdcall :library "user32.dll")
+:uint
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(n-default :int)
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-private-profile-string "GetPrivateProfileStringW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(lp-default (:string :encoding :utf-16le))
+(n-size :ulong)
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (write-private-profile-string "WritePrivateProfileStringW" :convention :stdcall :library "user32.dll")
+:int
+(lp-app-name (:string :encoding :utf-16le))
+(lp-key-name (:string :encoding :utf-16le))
+(lp-string (:string :encoding :utf-16le))
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-private-profile-section "GetPrivateProfileSectionW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-app-name (:string :encoding :utf-16le))
+(n-size :ulong)
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (write-private-profile-section "WritePrivateProfileSectionW" :convention :stdcall :library "user32.dll")
+:int
+(lp-app-name (:string :encoding :utf-16le))
+(lp-string (:string :encoding :utf-16le))
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-private-profile-section-names "GetPrivateProfileSectionNamesW" :convention :stdcall :library "user32.dll")
+:ulong
+(n-size :ulong)
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-private-profile-struct "GetPrivateProfileStructW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-section (:string :encoding :utf-16le))
+(lpsz-key (:string :encoding :utf-16le))
+(lp-struct (:pointer :void))
+(u-size-struct :uint)
+(sz-file (:string :encoding :utf-16le)))
+
+(cffi:defcfun (write-private-profile-struct "WritePrivateProfileStructW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-section (:string :encoding :utf-16le))
+(lpsz-key (:string :encoding :utf-16le))
+(lp-struct (:pointer :void))
+(u-size-struct :uint)
+(sz-file (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-drive-type "GetDriveTypeW" :convention :stdcall :library "user32.dll")
+:uint
+(lp-root-path-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-system-directory "GetSystemDirectoryW" :convention :stdcall :library "user32.dll")
+:uint
+(u-size :uint))
+
+(cffi:defcfun (get-temp-path "GetTempPathW" :convention :stdcall :library "user32.dll")
+:ulong
+(n-buffer-length :ulong))
+
+(cffi:defcfun (get-temp-file-name "GetTempFileNameW" :convention :stdcall :library "user32.dll")
+:uint
+(lp-path-name (:string :encoding :utf-16le))
+(lp-prefix-string (:string :encoding :utf-16le))
+(u-unique :uint)
+(lp-temp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-windows-directory "GetWindowsDirectoryW" :convention :stdcall :library "user32.dll")
+:uint
+(u-size :uint))
+
+(cffi:defcfun (get-system-windows-directory "GetSystemWindowsDirectoryW" :convention :stdcall :library "user32.dll")
+:uint
+(u-size :uint))
+
+(cffi:defcfun (get-system-wow64-directory "GetSystemWow64DirectoryW" :convention :stdcall :library "user32.dll")
+:uint
+(u-size :uint))
+
+(cffi:defcfun (wow64-enable-wow64-fs-redirection "Wow64EnableWow64FsRedirection" :convention :stdcall :library "user32.dll")
+:int8
+(wow64-fs-enable-redirection :int8))
+
+(cffi:defcfun (wow64-disable-wow64-fs-redirection "Wow64DisableWow64FsRedirection" :convention :stdcall :library "user32.dll")
+:int
+(old-value (:string :void)))
+
+(cffi:defcfun (wow64-revert-wow64-fs-redirection "Wow64RevertWow64FsRedirection" :convention :stdcall :library "user32.dll")
+:int
+(ol-value (:string :void)))
+
+(cffi:defcfun (set-current-directory "SetCurrentDirectoryW" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-current-directory "GetCurrentDirectoryW" :convention :stdcall :library "user32.dll")
+:ulong
+(n-buffer-length :ulong))
+
+(cffi:defcfun (set-dll-directory "SetDllDirectoryW" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-dll-directory "GetDllDirectoryW" :convention :stdcall :library "user32.dll")
+:ulong
+(n-buffer-length :ulong))
+
+(cffi:defcfun (set-search-path-mode "SetSearchPathMode" :convention :stdcall :library "user32.dll")
+:int
+(flags :ulong))
+
+(cffi:defcfun (get-disk-free-space "GetDiskFreeSpaceW" :convention :stdcall :library "user32.dll")
+:int
+(lp-root-path-name (:string :encoding :utf-16le))
+(lp-sectors-per-cluster (:pointer :int32))
+(lp-bytes-per-sector (:pointer :int32))
+(lp-number-of-free-clusters (:pointer :int32))
+(lp-total-number-of-clusters (:pointer :int32)))
+
+(cffi:defcfun (get-disk-free-space-ex "GetDiskFreeSpaceExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-directory-name (:string :encoding :utf-16le))
+(lp-free-bytes-available-to-caller (:pointer (:struct pularge_integer)))
+(lp-total-number-of-bytes (:pointer (:struct pularge_integer)))
+(lp-total-number-of-free-bytes (:pointer (:struct pularge_integer))))
+
+(cffi:defcfun (create-directory "CreateDirectoryW" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :utf-16le))
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes))))
+
+(cffi:defcfun (create-directory-ex "CreateDirectoryExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-template-directory (:string :encoding :utf-16le))
+(lp-new-directory (:string :encoding :utf-16le))
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes))))
+
+(cffi:defcfun (create-directory-transacted "CreateDirectoryTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-template-directory (:string :encoding :utf-16le))
+(lp-new-directory (:string :encoding :utf-16le))
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes)))
+(h-transaction :int64))
+
+(cffi:defcfun (remove-directory "RemoveDirectoryW" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (remove-directory-transacted "RemoveDirectoryTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-path-name (:string :encoding :utf-16le))
+(h-transaction :int64))
+
+(cffi:defcfun (get-full-path-name "GetFullPathNameW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-file-name (:string :encoding :utf-16le))
+(n-buffer-length :ulong)
+(lp-file-part (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-full-path-name-transacted "GetFullPathNameTransactedW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-file-name (:string :encoding :utf-16le))
+(n-buffer-length :ulong)
+(lp-file-part (:string :encoding :utf-16le))
+(h-transaction :int64))
+
+(cffi:defcfun (define-dos-device "DefineDosDeviceW" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(lp-device-name (:string :encoding :utf-16le))
+(lp-target-path (:string :encoding :utf-16le)))
+
+(cffi:defcfun (query-dos-device "QueryDosDeviceW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-device-name (:string :encoding :utf-16le))
+(ucch-max :ulong))
+
+(cffi:defcfun (create-file "CreateFileW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(dw-desired-access :ulong)
+(dw-share-mode :ulong)
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-creation-disposition :ulong)
+(dw-flags-and-attributes :ulong)
+(h-template-file :int64))
+
+(cffi:defcfun (create-file-transacted "CreateFileTransactedW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(dw-desired-access :ulong)
+(dw-share-mode :ulong)
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-creation-disposition :ulong)
+(dw-flags-and-attributes :ulong)
+(h-template-file :int64)
+(h-transaction :int64)
+(pus-mini-version (:pointer :ushort))
+(lp-extended-parameter (:string :void)))
+
+(cffi:defcfun (re-open-file "ReOpenFile" :convention :stdcall :library "user32.dll")
+:int64
+(h-original-file :int64)
+(dw-desired-access :ulong)
+(dw-share-mode :ulong)
+(dw-flags-and-attributes :ulong))
+
+(cffi:defcfun (set-file-attributes "SetFileAttributesW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(dw-file-attributes :ulong))
+
+(cffi:defcfun (get-file-attributes "GetFileAttributesW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (set-file-attributes-transacted "SetFileAttributesTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(dw-file-attributes :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (get-file-attributes-transacted "GetFileAttributesTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(f-info-level-id (:pointer (:struct get_fileex_info_levels)))
+(lp-file-information (:pointer :void))
+(h-transaction :int64))
+
+(cffi:defcfun (get-file-attributes-ex "GetFileAttributesExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(f-info-level-id (:pointer (:struct get_fileex_info_levels)))
+(lp-file-information (:pointer :void)))
+
+(cffi:defcfun (get-compressed-file-size "GetCompressedFileSizeW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-file-name (:string :encoding :utf-16le))
+(lp-file-size-high (:pointer :int32)))
+
+(cffi:defcfun (get-compressed-file-size-transacted "GetCompressedFileSizeTransactedW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-file-name (:string :encoding :utf-16le))
+(lp-file-size-high (:pointer :int32))
+(h-transaction :int64))
+
+(cffi:defcfun (delete-file "DeleteFileW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (delete-file-transacted "DeleteFileTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(h-transaction :int64))
+
+(cffi:defcfun (check-name-legal-do-s8-dot3 "CheckNameLegalDOS8Dot3W" :convention :stdcall :library "user32.dll")
+:int
+(lp-name (:string :encoding :utf-16le))
+(lp-oem-name (:pointer :char))
+(oem-name-size :ulong)
+(optional (:pointer (:struct pbnamecontainsspaces)))
+(pb-name-legal (:pointer :int)))
+
+(cffi:defcfun (find-first-file-ex "FindFirstFileExW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(f-info-level-id (:pointer (:struct findex_info_levels)))
+(lp-find-file-data (:pointer :void))
+(f-search-op (:pointer (:struct findex_search_ops)))
+(lp-search-filter (:pointer :void))
+(dw-additional-flags :ulong))
+
+(cffi:defcfun (find-first-file-transacted "FindFirstFileTransactedW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(f-info-level-id (:pointer (:struct findex_info_levels)))
+(lp-find-file-data (:pointer :void))
+(f-search-op (:pointer (:struct findex_search_ops)))
+(lp-search-filter (:pointer :void))
+(dw-additional-flags :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (find-first-file "FindFirstFileW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(lp-find-file-data (:pointer (:struct lpwin32_find_dataw))))
+
+(cffi:defcfun (find-next-file "FindNextFileW" :convention :stdcall :library "user32.dll")
+:int
+(h-find-file :int64)
+(lp-find-file-data (:pointer (:struct lpwin32_find_dataw))))
+
+(cffi:defcfun (search-path "SearchPathW" :convention :stdcall :library "user32.dll")
+:ulong
+(lp-path (:string :encoding :utf-16le))
+(lp-file-name (:string :encoding :utf-16le))
+(lp-extension (:string :encoding :utf-16le))
+(n-buffer-length :ulong)
+(lp-file-part (:string :encoding :utf-16le)))
+
+(cffi:defcfun (copy-file "CopyFileW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(b-fail-if-exists :int))
+
+(cffi:defcfun (copy-file-ex "CopyFileExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(lp-progress-routine (:pointer (:struct lpprogress_routine)))
+(lp-data (:pointer :void))
+(pb-cancel (:pointer :int))
+(dw-copy-flags :ulong))
+
+(cffi:defcfun (copy-file-transacted "CopyFileTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(lp-progress-routine (:pointer (:struct lpprogress_routine)))
+(lp-data (:pointer :void))
+(pb-cancel (:pointer :int))
+(dw-copy-flags :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (move-file "MoveFileW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (move-file-ex "MoveFileExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(dw-flags :ulong))
+
+(cffi:defcfun (move-file-with-progress "MoveFileWithProgressW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(lp-progress-routine (:pointer (:struct lpprogress_routine)))
+(lp-data (:pointer :void))
+(dw-flags :ulong))
+
+(cffi:defcfun (move-file-transacted "MoveFileTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-new-file-name (:string :encoding :utf-16le))
+(lp-progress-routine (:pointer (:struct lpprogress_routine)))
+(lp-data (:pointer :void))
+(dw-flags :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (replace-file "ReplaceFileW" :convention :stdcall :library "user32.dll")
+:int
+(lp-replaced-file-name (:string :encoding :utf-16le))
+(lp-replacement-file-name (:string :encoding :utf-16le))
+(lp-backup-file-name (:string :encoding :utf-16le))
+(dw-replace-flags :ulong)
+(lp-exclude (:pointer :void))
+(lp-reserved (:pointer :void)))
+
+(cffi:defcfun (create-hard-link "CreateHardLinkW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes))))
+
+(cffi:defcfun (create-hard-link-transacted "CreateHardLinkTransactedW" :convention :stdcall :library "user32.dll")
+:int
+(lp-file-name (:string :encoding :utf-16le))
+(lp-existing-file-name (:string :encoding :utf-16le))
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes)))
+(h-transaction :int64))
+
+(cffi:defcfun (find-first-stream "FindFirstStreamW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(info-level (:pointer (:struct stream_info_levels)))
+(lp-find-stream-data (:pointer :void))
+(dw-flags :ulong))
+
+(cffi:defcfun (find-first-stream-transacted "FindFirstStreamTransactedW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(info-level (:pointer (:struct stream_info_levels)))
+(lp-find-stream-data (:pointer :void))
+(dw-flags :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (find-next-stream "FindNextStreamW" :convention :stdcall :library "user32.dll")
+:int
+(h-find-stream :int64)
+(lp-find-stream-data (:pointer :void)))
+
+(cffi:defcfun (find-first-file-name "FindFirstFileNameW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(string-length (:pointer :int32))
+(link-name (:pointer :wchar)))
+
+(cffi:defcfun (find-next-file-name "FindNextFileNameW" :convention :stdcall :library "user32.dll")
+:int
+(h-find-stream :int64)
+(string-length (:pointer :int32))
+(link-name (:pointer :wchar)))
+
+(cffi:defcfun (find-first-file-name-transacted "FindFirstFileNameTransactedW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-file-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(string-length (:pointer :int32))
+(link-name (:pointer :wchar))
+(h-transaction :int64))
+
+(cffi:defcfun (create-named-pipe "CreateNamedPipeW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-name (:string :encoding :utf-16le))
+(dw-open-mode :ulong)
+(dw-pipe-mode :ulong)
+(n-max-instances :ulong)
+(n-out-buffer-size :ulong)
+(n-in-buffer-size :ulong)
+(n-default-time-out :ulong)
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes))))
+
+(cffi:defcfun (get-named-pipe-handle-state "GetNamedPipeHandleStateW" :convention :stdcall :library "user32.dll")
+:int
+(h-named-pipe :int64)
+(lp-state (:pointer :int32))
+(lp-cur-instances (:pointer :int32))
+(lp-max-collection-count (:pointer :int32))
+(lp-collect-data-timeout (:pointer :int32))
+(lp-user-name (:string :encoding :utf-16le))
+(n-max-user-name-size :ulong))
+
+(cffi:defcfun (call-named-pipe "CallNamedPipeW" :convention :stdcall :library "user32.dll")
+:int
+(lp-named-pipe-name (:string :encoding :utf-16le))
+(lp-in-buffer (:pointer :void))
+(n-in-buffer-size :ulong)
+(n-out-buffer-size :ulong)
+(lp-bytes-read (:pointer :int32))
+(n-time-out :ulong))
+
+(cffi:defcfun (wait-named-pipe "WaitNamedPipeW" :convention :stdcall :library "user32.dll")
+:int
+(lp-named-pipe-name (:string :encoding :utf-16le))
+(n-time-out :ulong))
+
+(cffi:defcfun (get-named-pipe-attribute "GetNamedPipeAttribute" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(attribute-type (:pointer (:struct pipe_attribute_type)))
+(attribute-name (:pointer :char))
+(attribute-value (:string :void))
+(attribute-value-length (:pointer :uint64)))
+
+(cffi:defcfun (set-named-pipe-attribute "SetNamedPipeAttribute" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(attribute-type (:pointer (:struct pipe_attribute_type)))
+(attribute-name (:pointer :char))
+(attribute-value (:string :void))
+(attribute-value-length :uint64))
+
+(cffi:defcfun (get-named-pipe-client-computer-name "GetNamedPipeClientComputerNameW" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(client-computer-name (:string :encoding :utf-16le))
+(client-computer-name-length :ulong))
+
+(cffi:defcfun (get-named-pipe-client-process-id "GetNamedPipeClientProcessId" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(client-process-id (:pointer :ulong)))
+
+(cffi:defcfun (get-named-pipe-client-session-id "GetNamedPipeClientSessionId" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(client-session-id (:pointer :ulong)))
+
+(cffi:defcfun (get-named-pipe-server-process-id "GetNamedPipeServerProcessId" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(server-process-id (:pointer :ulong)))
+
+(cffi:defcfun (get-named-pipe-server-session-id "GetNamedPipeServerSessionId" :convention :stdcall :library "user32.dll")
+:int
+(pipe :int64)
+(server-session-id (:pointer :ulong)))
+
+(cffi:defcfun (set-volume-label "SetVolumeLabelW" :convention :stdcall :library "user32.dll")
+:int
+(lp-root-path-name (:string :encoding :utf-16le))
+(lp-volume-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (set-file-apis-to-oem "SetFileApisToOEM" :convention :stdcall :library "user32.dll")
+:void)
+
+(cffi:defcfun (set-file-apis-to-ansi "SetFileApisToANSI" :convention :stdcall :library "user32.dll")
+:void)
+
+(cffi:defcfun (are-file-apis-ansi "AreFileApisANSI" :convention :stdcall :library "user32.dll")
+:int)
+
+(cffi:defcfun (get-volume-information "GetVolumeInformationW" :convention :stdcall :library "user32.dll")
+:int
+(lp-root-path-name (:string :encoding :utf-16le))
+(lp-volume-name-buffer (:string :encoding :utf-16le))
+(n-volume-name-size :ulong)
+(lp-volume-serial-number (:pointer :int32))
+(lp-maximum-component-length (:pointer :int32))
+(lp-file-system-flags (:pointer :int32))
+(lp-file-system-name-buffer (:string :encoding :utf-16le))
+(n-file-system-name-size :ulong))
+
+(cffi:defcfun (get-volume-information-by-handle "GetVolumeInformationByHandleW" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-volume-name-buffer (:string :encoding :utf-16le))
+(n-volume-name-size :ulong)
+(lp-volume-serial-number (:pointer :int32))
+(lp-maximum-component-length (:pointer :int32))
+(lp-file-system-flags (:pointer :int32))
+(lp-file-system-name-buffer (:string :encoding :utf-16le))
+(n-file-system-name-size :ulong))
+
+(cffi:defcfun (cancel-synchronous-io "CancelSynchronousIo" :convention :stdcall :library "user32.dll")
+:int
+(h-thread :int64))
+
+(cffi:defcfun (cancel-io-ex "CancelIoEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-overlapped (:pointer (:struct lpoverlapped))))
+
+(cffi:defcfun (cancel-io "CancelIo" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64))
+
+(cffi:defcfun (set-file-bandwidth-reservation "SetFileBandwidthReservation" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(n-period-milliseconds :ulong)
+(n-bytes-per-period :ulong)
+(b-discardable :int)
+(lp-transfer-size (:pointer :int32))
+(lp-num-outstanding-requests (:pointer :int32)))
+
+(cffi:defcfun (get-file-bandwidth-reservation "GetFileBandwidthReservation" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(lp-period-milliseconds (:pointer :int32))
+(lp-bytes-per-period (:pointer :int32))
+(p-discardable (:pointer :int))
+(lp-transfer-size (:pointer :int32))
+(lp-num-outstanding-requests (:pointer :int32)))
+
+(cffi:defcfun (find-first-change-notification "FindFirstChangeNotificationW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-path-name (:string :encoding :utf-16le))
+(b-watch-subtree :int)
+(dw-notify-filter :ulong))
+
+(cffi:defcfun (find-next-change-notification "FindNextChangeNotification" :convention :stdcall :library "user32.dll")
+:int
+(h-change-handle :int64))
+
+(cffi:defcfun (find-close-change-notification "FindCloseChangeNotification" :convention :stdcall :library "user32.dll")
+:int
+(h-change-handle :int64))
+
+(cffi:defcfun (read-directory-changes "ReadDirectoryChangesW" :convention :stdcall :library "user32.dll")
+:int
+(h-directory :int64)
+(n-buffer-length :ulong)
+(b-watch-subtree :int)
+(dw-notify-filter :ulong)
+(lp-bytes-returned (:pointer :int32))
+(lp-overlapped (:pointer (:struct lpoverlapped)))
+(lp-completion-routine (:pointer (:struct lpoverlapped_completion_routine))))
+
+(cffi:defcfun (virtual-lock "VirtualLock" :convention :stdcall :library "user32.dll")
+:int
+(lp-address (:pointer :void))
+(dw-size :uint64))
+
+(cffi:defcfun (virtual-unlock "VirtualUnlock" :convention :stdcall :library "user32.dll")
+:int
+(lp-address (:pointer :void))
+(dw-size :uint64))
+
+(cffi:defcfun (map-view-of-file-ex "MapViewOfFileEx" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-file-mapping-object :int64)
+(dw-desired-access :ulong)
+(dw-file-offset-high :ulong)
+(dw-file-offset-low :ulong)
+(dw-number-of-bytes-to-map :uint64)
+(lp-base-address (:pointer :void)))
+
+(cffi:defcfun (map-view-of-file-ex-numa "MapViewOfFileExNuma" :convention :stdcall :library "user32.dll")
+(:pointer :void)
+(h-file-mapping-object :int64)
+(dw-desired-access :ulong)
+(dw-file-offset-high :ulong)
+(dw-file-offset-low :ulong)
+(dw-number-of-bytes-to-map :uint64)
+(lp-base-address (:pointer :void))
+(nnd-preferred :ulong))
+
+(cffi:defcfun (set-priority-class "SetPriorityClass" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(dw-priority-class :ulong))
+
+(cffi:defcfun (get-priority-class "GetPriorityClass" :convention :stdcall :library "user32.dll")
+:ulong
+(h-process :int64))
+
+(cffi:defcfun (is-bad-read-ptr "IsBadReadPtr" :convention :stdcall :library "user32.dll")
+:int
+(lp :void)
+(ucb :uint64))
+
+(cffi:defcfun (is-bad-write-ptr "IsBadWritePtr" :convention :stdcall :library "user32.dll")
+:int
+(lp (:pointer :void))
+(ucb :uint64))
+
+(cffi:defcfun (is-bad-huge-read-ptr "IsBadHugeReadPtr" :convention :stdcall :library "user32.dll")
+:int
+(lp :void)
+(ucb :uint64))
+
+(cffi:defcfun (is-bad-huge-write-ptr "IsBadHugeWritePtr" :convention :stdcall :library "user32.dll")
+:int
+(lp (:pointer :void))
+(ucb :uint64))
+
+(cffi:defcfun (is-bad-code-ptr "IsBadCodePtr" :convention :stdcall :library "user32.dll")
+:int
+(lpfn (:pointer (:struct farproc))))
+
+(cffi:defcfun (is-bad-string-ptr "IsBadStringPtrW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz (:string :encoding :utf-16le))
+(ucch-max :uint64))
+
+(cffi:defcfun (build-comm-dcb "BuildCommDCBW" :convention :stdcall :library "user32.dll")
+:int
+(lp-def (:string :encoding :utf-16le))
+(lp-dcb (:pointer (:struct lpdcb))))
+
+(cffi:defcfun (build-comm-dcb-and-timeouts "BuildCommDCBAndTimeoutsW" :convention :stdcall :library "user32.dll")
+:int
+(lp-def (:string :encoding :utf-16le))
+(lp-dcb (:pointer (:struct lpdcb)))
+(lp-comm-timeouts (:pointer (:struct lpcommtimeouts))))
+
+(cffi:defcfun (comm-config-dialog "CommConfigDialogW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-name (:string :encoding :utf-16le))
+(h-wnd :handle)
+(lp-cc (:pointer (:struct lpcommconfig))))
+
+(cffi:defcfun (get-default-comm-config "GetDefaultCommConfigW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-name (:string :encoding :utf-16le))
+(lpdw-size (:pointer :int32)))
+
+(cffi:defcfun (set-default-comm-config "SetDefaultCommConfigW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-name (:string :encoding :utf-16le))
+(lp-cc (:pointer (:struct lpcommconfig)))
+(dw-size :ulong))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:!=
+(get-computer-name-a (:pointer (:struct getcomputernamea)))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:!=
+(get-computer-name-w (:pointer (:struct getcomputernamew)))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (set-computer-name "SetComputerNameW" :convention :stdcall :library "user32.dll")
+:int
+(lp-computer-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:!=
+(get-computer-name-ex-a (:pointer (:struct getcomputernameexa)))
+(name-type (:pointer (:struct computer_name_format)))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:!=
+(get-computer-name-ex-w (:pointer (:struct getcomputernameexw)))
+(name-type (:pointer (:struct computer_name_format)))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (set-computer-name-ex "SetComputerNameExW" :convention :stdcall :library "user32.dll")
+:int
+(name-type (:pointer (:struct computer_name_format)))
+(lp-buffer (:string :encoding :utf-16le)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:==
+(dns-hostname-to-computer-name-a (:pointer (:struct dnshostnametocomputernamea)))
+(hostname (:string :encoding :ascii))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (winapi "WINAPI" :convention :stdcall :library "user32.dll")
+:==
+(dns-hostname-to-computer-name-w (:pointer (:struct dnshostnametocomputernamew)))
+(hostname (:string :encoding :utf-16le))
+(n-size (:pointer :int32)))
+
+(cffi:defcfun (register-wait-for-single-object "RegisterWaitForSingleObject" :convention :stdcall :library "user32.dll")
+:int
+(ph-new-wait-object (:pointer :handle))
+(h-object :int64)
+(callback (:pointer (:struct waitortimercallback)))
+(context (:string :void))
+(dw-milliseconds :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (register-wait-for-single-object-ex "RegisterWaitForSingleObjectEx" :convention :stdcall :library "user32.dll")
+:int64
+(h-object :int64)
+(callback (:pointer (:struct waitortimercallback)))
+(context (:string :void))
+(dw-milliseconds :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (unregister-wait "UnregisterWait" :convention :stdcall :library "user32.dll")
+:int
+(wait-handle :int64))
+
+(cffi:defcfun (unregister-wait-ex "UnregisterWaitEx" :convention :stdcall :library "user32.dll")
+:int
+(wait-handle :int64)
+(completion-event :int64))
+
+(cffi:defcfun (queue-user-work-item "QueueUserWorkItem" :convention :stdcall :library "user32.dll")
+:int
+(function (:pointer (:struct lpthread_start_routine)))
+(context (:string :void))
+(flags :ulong))
+
+(cffi:defcfun (bind-io-completion-callback "BindIoCompletionCallback" :convention :stdcall :library "user32.dll")
+:int
+(file-handle :int64)
+(function (:pointer (:struct lpoverlapped_completion_routine)))
+(flags :ulong))
+
+(cffi:defcfun (create-timer-queue "CreateTimerQueue" :convention :stdcall :library "user32.dll")
+:int64
+(void :void))
+
+(cffi:defcfun (create-timer-queue-timer "CreateTimerQueueTimer" :convention :stdcall :library "user32.dll")
+:int
+(ph-new-timer (:pointer :handle))
+(timer-queue :int64)
+(callback (:pointer (:struct waitortimercallback)))
+(parameter (:string :void))
+(due-time :ulong)
+(period :ulong)
+(flags :ulong))
+
+(cffi:defcfun (change-timer-queue-timer "ChangeTimerQueueTimer" :convention :stdcall :library "user32.dll")
+:int
+(timer-queue :int64)
+(timer :int64)
+(due-time :ulong)
+(period :ulong))
+
+(cffi:defcfun (delete-timer-queue-timer "DeleteTimerQueueTimer" :convention :stdcall :library "user32.dll")
+:int
+(timer-queue :int64)
+(timer :int64)
+(completion-event :int64))
+
+(cffi:defcfun (delete-timer-queue-ex "DeleteTimerQueueEx" :convention :stdcall :library "user32.dll")
+:int
+(timer-queue :int64)
+(completion-event :int64))
+
+(cffi:defcfun (set-timer-queue-timer "SetTimerQueueTimer" :convention :stdcall :library "user32.dll")
+:int64
+(timer-queue :int64)
+(callback (:pointer (:struct waitortimercallback)))
+(parameter (:string :void))
+(due-time :ulong)
+(period :ulong)
+(prefer-io :int))
+
+(cffi:defcfun (cancel-timer-queue-timer "CancelTimerQueueTimer" :convention :stdcall :library "user32.dll")
+:int
+(timer-queue :int64)
+(timer :int64))
+
+(cffi:defcfun (delete-timer-queue "DeleteTimerQueue" :convention :stdcall :library "user32.dll")
+:int
+(timer-queue :int64))
+
+(cffi:defcfun (create-threadpool "CreateThreadpool" :convention :stdcall :library "user32.dll")
+:PTP_POOL
+(reserved (:string :void)))
+
+(cffi:defcfun (set-threadpool-thread-maximum "SetThreadpoolThreadMaximum" :convention :stdcall :library "user32.dll")
+:void
+(ptpp (:pointer (:struct ptp_pool)))
+(cthrd-most :ulong))
+
+(cffi:defcfun (set-threadpool-thread-minimum "SetThreadpoolThreadMinimum" :convention :stdcall :library "user32.dll")
+:int
+(ptpp (:pointer (:struct ptp_pool)))
+(cthrd-mic :ulong))
+
+(cffi:defcfun (set-threadpool-stack-information "SetThreadpoolStackInformation" :convention :stdcall :library "user32.dll")
+:int
+(ptpp (:pointer (:struct ptp_pool)))
+(ptpsi (:pointer (:struct ptp_pool_stack_information))))
+
+(cffi:defcfun (query-threadpool-stack-information "QueryThreadpoolStackInformation" :convention :stdcall :library "user32.dll")
+:int
+(ptpp (:pointer (:struct ptp_pool)))
+(ptpsi (:pointer (:struct ptp_pool_stack_information))))
+
+(cffi:defcfun (close-threadpool "CloseThreadpool" :convention :stdcall :library "user32.dll")
+:void
+(ptpp (:pointer (:struct ptp_pool))))
+
+(cffi:defcfun (create-threadpool-cleanup-group "CreateThreadpoolCleanupGroup" :convention :stdcall :library "user32.dll")
+:PTP_CLEANUP_GROUP
+(void :void))
+
+(cffi:defcfun (close-threadpool-cleanup-group-members "CloseThreadpoolCleanupGroupMembers" :convention :stdcall :library "user32.dll")
+:void
+(ptpcg (:pointer (:struct ptp_cleanup_group)))
+(f-cancel-pending-callbacks :int)
+(pv-cleanup-context (:string :void)))
+
+(cffi:defcfun (close-threadpool-cleanup-group "CloseThreadpoolCleanupGroup" :convention :stdcall :library "user32.dll")
+:void
+(ptpcg (:pointer (:struct ptp_cleanup_group))))
+
+(cffi:defcfun (set-event-when-callback-returns "SetEventWhenCallbackReturns" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance)))
+(evt :int64))
+
+(cffi:defcfun (release-semaphore-when-callback-returns "ReleaseSemaphoreWhenCallbackReturns" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance)))
+(sem :int64)
+(crel :ulong))
+
+(cffi:defcfun (release-mutex-when-callback-returns "ReleaseMutexWhenCallbackReturns" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance)))
+(mut :int64))
+
+(cffi:defcfun (leave-critical-section-when-callback-returns "LeaveCriticalSectionWhenCallbackReturns" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance)))
+(pcs (:pointer (:struct pcritical_section))))
+
+(cffi:defcfun (free-library-when-callback-returns "FreeLibraryWhenCallbackReturns" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance)))
+(mod :handle))
+
+(cffi:defcfun (callback-may-run-long "CallbackMayRunLong" :convention :stdcall :library "user32.dll")
+:int
+(pci (:pointer (:struct ptp_callback_instance))))
+
+(cffi:defcfun (disassociate-current-thread-from-callback "DisassociateCurrentThreadFromCallback" :convention :stdcall :library "user32.dll")
+:void
+(pci (:pointer (:struct ptp_callback_instance))))
+
+(cffi:defcfun (try-submit-threadpool-callback "TrySubmitThreadpoolCallback" :convention :stdcall :library "user32.dll")
+:int
+(pfns (:pointer (:struct ptp_simple_callback)))
+(pv (:string :void))
+(pcbe (:pointer (:struct ptp_callback_environ))))
+
+(cffi:defcfun (create-threadpool-work "CreateThreadpoolWork" :convention :stdcall :library "user32.dll")
+:PTP_WORK
+(pfnwk (:pointer (:struct ptp_work_callback)))
+(pv (:string :void))
+(pcbe (:pointer (:struct ptp_callback_environ))))
+
+(cffi:defcfun (submit-threadpool-work "SubmitThreadpoolWork" :convention :stdcall :library "user32.dll")
+:void
+(pwk (:pointer (:struct ptp_work))))
+
+(cffi:defcfun (wait-for-threadpool-work-callbacks "WaitForThreadpoolWorkCallbacks" :convention :stdcall :library "user32.dll")
+:void
+(pwk (:pointer (:struct ptp_work)))
+(f-cancel-pending-callbacks :int))
+
+(cffi:defcfun (close-threadpool-work "CloseThreadpoolWork" :convention :stdcall :library "user32.dll")
+:void
+(pwk (:pointer (:struct ptp_work))))
+
+(cffi:defcfun (create-threadpool-timer "CreateThreadpoolTimer" :convention :stdcall :library "user32.dll")
+:PTP_TIMER
+(pfnti (:pointer (:struct ptp_timer_callback)))
+(pv (:string :void))
+(pcbe (:pointer (:struct ptp_callback_environ))))
+
+(cffi:defcfun (set-threadpool-timer "SetThreadpoolTimer" :convention :stdcall :library "user32.dll")
+:void
+(pti (:pointer (:struct ptp_timer)))
+(pft-due-time (:pointer (:struct pfiletime)))
+(ms-period :ulong)
+(ms-window-length :ulong))
+
+(cffi:defcfun (is-threadpool-timer-set "IsThreadpoolTimerSet" :convention :stdcall :library "user32.dll")
+:int
+(pti (:pointer (:struct ptp_timer))))
+
+(cffi:defcfun (wait-for-threadpool-timer-callbacks "WaitForThreadpoolTimerCallbacks" :convention :stdcall :library "user32.dll")
+:void
+(pti (:pointer (:struct ptp_timer)))
+(f-cancel-pending-callbacks :int))
+
+(cffi:defcfun (close-threadpool-timer "CloseThreadpoolTimer" :convention :stdcall :library "user32.dll")
+:void
+(pti (:pointer (:struct ptp_timer))))
+
+(cffi:defcfun (create-threadpool-wait "CreateThreadpoolWait" :convention :stdcall :library "user32.dll")
+:PTP_WAIT
+(pfnwa (:pointer (:struct ptp_wait_callback)))
+(pv (:string :void))
+(pcbe (:pointer (:struct ptp_callback_environ))))
+
+(cffi:defcfun (set-threadpool-wait "SetThreadpoolWait" :convention :stdcall :library "user32.dll")
+:void
+(pwa (:pointer (:struct ptp_wait)))
+(h :int64)
+(pft-timeout (:pointer (:struct pfiletime))))
+
+(cffi:defcfun (wait-for-threadpool-wait-callbacks "WaitForThreadpoolWaitCallbacks" :convention :stdcall :library "user32.dll")
+:void
+(pwa (:pointer (:struct ptp_wait)))
+(f-cancel-pending-callbacks :int))
+
+(cffi:defcfun (close-threadpool-wait "CloseThreadpoolWait" :convention :stdcall :library "user32.dll")
+:void
+(pwa (:pointer (:struct ptp_wait))))
+
+(cffi:defcfun (create-threadpool-io "CreateThreadpoolIo" :convention :stdcall :library "user32.dll")
+:PTP_IO
+(fl :int64)
+(pfnio (:pointer (:struct ptp_win32_io_callback)))
+(pv (:string :void))
+(pcbe (:pointer (:struct ptp_callback_environ))))
+
+(cffi:defcfun (start-threadpool-io "StartThreadpoolIo" :convention :stdcall :library "user32.dll")
+:void
+(pio (:pointer (:struct ptp_io))))
+
+(cffi:defcfun (cancel-threadpool-io "CancelThreadpoolIo" :convention :stdcall :library "user32.dll")
+:void
+(pio (:pointer (:struct ptp_io))))
+
+(cffi:defcfun (wait-for-threadpool-io-callbacks "WaitForThreadpoolIoCallbacks" :convention :stdcall :library "user32.dll")
+:void
+(pio (:pointer (:struct ptp_io)))
+(f-cancel-pending-callbacks :int))
+
+(cffi:defcfun (close-threadpool-io "CloseThreadpoolIo" :convention :stdcall :library "user32.dll")
+:void
+(pio (:pointer (:struct ptp_io))))
+
+(cffi:defcfun (create-private-namespace "CreatePrivateNamespaceW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-private-namespace-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-boundary-descriptor (:pointer :void))
+(lp-alias-prefix (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-private-namespace "OpenPrivateNamespaceW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-boundary-descriptor (:pointer :void))
+(lp-alias-prefix (:string :encoding :utf-16le)))
+
+(cffi:defcfun (close-private-namespace "ClosePrivateNamespace" :convention :stdcall :library "user32.dll")
+:int8
+(handle :int64)
+(flags :ulong))
+
+(cffi:defcfun (create-boundary-descriptor "CreateBoundaryDescriptorW" :convention :stdcall :library "user32.dll")
+:int64
+(name (:string :encoding :utf-16le))
+(flags :ulong))
+
+(cffi:defcfun (add-sid-to-boundary-descriptor "AddSIDToBoundaryDescriptor" :convention :stdcall :library "user32.dll")
+:int
+(boundary-descriptor :int64)
+(required-sid (:pointer (:struct psid))))
+
+(cffi:defcfun (add-integrity-label-to-boundary-descriptor "AddIntegrityLabelToBoundaryDescriptor" :convention :stdcall :library "user32.dll")
+:int
+(boundary-descriptor :int64)
+(integrity-label (:pointer (:struct psid))))
+
+(cffi:defcfun (delete-boundary-descriptor "DeleteBoundaryDescriptor" :convention :stdcall :library "user32.dll")
+:void
+(boundary-descriptor :int64))
+
+(cffi:defcstruct hw_profile_infoa
+(dw-dock-info :ulong)
+(sz-hw-profile-guid[-h-w_-profil-e_-guidle-n] :char)
+(sz-hw-profile-name[-ma-x_-profil-e_-le-n] :char))
+
+(cffi:defcstruct hw_profile_infow
+(dw-dock-info :ulong)
+(sz-hw-profile-guid[-h-w_-profil-e_-guidle-n] :wchar)
+(sz-hw-profile-name[-ma-x_-profil-e_-le-n] :wchar))
+
+(cffi:defcfun (query-performance-counter "QueryPerformanceCounter" :convention :stdcall :library "user32.dll")
+:int
+(lp-performance-count (:pointer (:struct large_integer))))
+
+(cffi:defcfun (query-performance-frequency "QueryPerformanceFrequency" :convention :stdcall :library "user32.dll")
+:int
+(lp-frequency (:pointer (:struct large_integer))))
+
+(cffi:defcfun (get-version-ex "GetVersionExW" :convention :stdcall :library "user32.dll")
+:int
+(lp-version-information (:pointer (:struct lposversioninfow))))
+
+(cffi:defcfun (verify-version-info "VerifyVersionInfoW" :convention :stdcall :library "user32.dll")
+:int
+(lp-version-information (:pointer (:struct lposversioninfoexw)))
+(dw-type-mask :ulong)
+(dwl-condition-mask :uint64))
+
+(cffi:defcfun (get-product-info "GetProductInfo" :convention :stdcall :library "user32.dll")
+:int
+(dw-os-major-version :ulong)
+(dw-os-minor-version :ulong)
+(dw-sp-major-version :ulong)
+(dw-sp-minor-version :ulong)
+(pdw-returned-product-type (:pointer :int32)))
+
+(cffi:defcfun (get-system-power-status "GetSystemPowerStatus" :convention :stdcall :library "user32.dll")
+:int
+(lp-system-power-status (:pointer (:struct lpsystem_power_status))))
+
+(cffi:defcfun (set-system-power-state "SetSystemPowerState" :convention :stdcall :library "user32.dll")
+:int
+(f-suspend :int)
+(f-force :int))
+
+(cffi:defcfun (allocate-user-physical-pages "AllocateUserPhysicalPages" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(number-of-pages (:pointer :uint64)))
+
+(cffi:defcfun (allocate-user-physical-pages-numa "AllocateUserPhysicalPagesNuma" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(number-of-pages (:pointer :uint64))
+(nnd-preferred :ulong))
+
+(cffi:defcfun (free-user-physical-pages "FreeUserPhysicalPages" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(number-of-pages (:pointer :uint64))
+(page-array (:pointer :uint64)))
+
+(cffi:defcfun (map-user-physical-pages "MapUserPhysicalPages" :convention :stdcall :library "user32.dll")
+:int
+(virtual-address (:string :void))
+(number-of-pages :uint64)
+(page-array (:pointer :uint64)))
+
+(cffi:defcfun (map-user-physical-pages-scatter "MapUserPhysicalPagesScatter" :convention :stdcall :library "user32.dll")
+:int
+(virtual-addresses (:string :void))
+(number-of-pages :uint64)
+(page-array (:pointer :uint64)))
+
+(cffi:defcfun (create-job-object "CreateJobObjectW" :convention :stdcall :library "user32.dll")
+:int64
+(lp-job-attributes (:pointer (:struct lpsecurity_attributes)))
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (open-job-object "OpenJobObjectW" :convention :stdcall :library "user32.dll")
+:int64
+(dw-desired-access :ulong)
+(b-inherit-handle :int)
+(lp-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (assign-process-to-job-object "AssignProcessToJobObject" :convention :stdcall :library "user32.dll")
+:int
+(h-job :int64)
+(h-process :int64))
+
+(cffi:defcfun (terminate-job-object "TerminateJobObject" :convention :stdcall :library "user32.dll")
+:int
+(h-job :int64)
+(u-exit-code :uint))
+
+(cffi:defcfun (query-information-job-object "QueryInformationJobObject" :convention :stdcall :library "user32.dll")
+:int
+(h-job :int64)
+(job-object-information-class (:pointer (:struct jobobjectinfoclass)))
+(cb-job-object-information-length :ulong)
+(lp-return-length (:pointer :int32)))
+
+(cffi:defcfun (set-information-job-object "SetInformationJobObject" :convention :stdcall :library "user32.dll")
+:int
+(h-job :int64)
+(job-object-information-class (:pointer (:struct jobobjectinfoclass)))
+(lp-job-object-information (:pointer :void))
+(cb-job-object-information-length :ulong))
+
+(cffi:defcfun (is-process-in-job "IsProcessInJob" :convention :stdcall :library "user32.dll")
+:int
+(process-handle :int64)
+(job-handle :int64)
+(result (:pointer :int)))
+
+(cffi:defcfun (create-job-set "CreateJobSet" :convention :stdcall :library "user32.dll")
+:int
+(num-job :ulong)
+(user-job-set (:pointer (:struct pjob_set_array)))
+(flags :ulong))
+
+(cffi:defcfun (add-vectored-exception-handler "AddVectoredExceptionHandler" :convention :stdcall :library "user32.dll")
+(:string :void)
+(first :ulong)
+(handler (:pointer (:struct pvectored_exception_handler))))
+
+(cffi:defcfun (remove-vectored-exception-handler "RemoveVectoredExceptionHandler" :convention :stdcall :library "user32.dll")
+:ulong
+(handle (:string :void)))
+
+(cffi:defcfun (add-vectored-continue-handler "AddVectoredContinueHandler" :convention :stdcall :library "user32.dll")
+(:string :void)
+(first :ulong)
+(handler (:pointer (:struct pvectored_exception_handler))))
+
+(cffi:defcfun (remove-vectored-continue-handler "RemoveVectoredContinueHandler" :convention :stdcall :library "user32.dll")
+:ulong
+(handle (:string :void)))
+
+(cffi:defcfun (find-first-volume "FindFirstVolumeW" :convention :stdcall :library "user32.dll")
+:int64
+(lpsz-volume-name (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (find-next-volume "FindNextVolumeW" :convention :stdcall :library "user32.dll")
+:int
+(h-find-volume :int64)
+(lpsz-volume-name (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (find-volume-close "FindVolumeClose" :convention :stdcall :library "user32.dll")
+:int
+(h-find-volume :int64))
+
+(cffi:defcfun (find-first-volume-mount-point "FindFirstVolumeMountPointW" :convention :stdcall :library "user32.dll")
+:int64
+(lpsz-root-path-name (:string :encoding :utf-16le))
+(lpsz-volume-mount-point (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (find-next-volume-mount-point "FindNextVolumeMountPointW" :convention :stdcall :library "user32.dll")
+:int
+(h-find-volume-mount-point :int64)
+(lpsz-volume-mount-point (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (find-volume-mount-point-close "FindVolumeMountPointClose" :convention :stdcall :library "user32.dll")
+:int
+(h-find-volume-mount-point :int64))
+
+(cffi:defcfun (set-volume-mount-point "SetVolumeMountPointW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-volume-mount-point (:string :encoding :utf-16le))
+(lpsz-volume-name (:string :encoding :utf-16le)))
+
+(cffi:defcfun (delete-volume-mount-point "DeleteVolumeMountPointW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-volume-mount-point (:string :encoding :utf-16le)))
+
+(cffi:defcfun (get-volume-name-for-volume-mount-point "GetVolumeNameForVolumeMountPointW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-volume-mount-point (:string :encoding :utf-16le))
+(lpsz-volume-name (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (get-volume-path-name "GetVolumePathNameW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-file-name (:string :encoding :utf-16le))
+(lpsz-volume-path-name (:string :encoding :utf-16le))
+(cch-buffer-length :ulong))
+
+(cffi:defcfun (get-volume-path-names-for-volume-name "GetVolumePathNamesForVolumeNameW" :convention :stdcall :library "user32.dll")
+:int
+(lpsz-volume-name (:string :encoding :utf-16le))
+(cch-buffer-length :ulong)
+(lpcch-return-length (:pointer :int32)))
+
+(cffi:defcstruct actctxa
+(cb-size :ulong)
+(dw-flags :ulong)
+(lp-source (:string :encoding :ascii))
+(w-processor-architecture :ushort)
+(w-lang-id :int16)
+(lp-assembly-directory (:string :encoding :ascii))
+(lp-resource-name (:string :encoding :ascii))
+(lp-application-name (:string :encoding :ascii))
+(h-module :handle))
+
+(cffi:defcstruct actctxw
+(cb-size :ulong)
+(dw-flags :ulong)
+(lp-source (:string :encoding :utf-16le))
+(w-processor-architecture :ushort)
+(w-lang-id :int16)
+(lp-assembly-directory (:string :encoding :utf-16le))
+(lp-resource-name (:string :encoding :utf-16le))
+(lp-application-name (:string :encoding :utf-16le))
+(h-module :handle))
+
+(cffi:defcfun (create-act-ctx "CreateActCtxW" :convention :stdcall :library "user32.dll")
+:int64
+(p-act-ctx (:pointer (:struct pcactctxw))))
+
+(cffi:defcfun (add-ref-act-ctx "AddRefActCtx" :convention :stdcall :library "user32.dll")
+:void
+(h-act-ctx :int64))
+
+(cffi:defcfun (release-act-ctx "ReleaseActCtx" :convention :stdcall :library "user32.dll")
+:void
+(h-act-ctx :int64))
+
+(cffi:defcfun (zombify-act-ctx "ZombifyActCtx" :convention :stdcall :library "user32.dll")
+:int
+(h-act-ctx :int64))
+
+(cffi:defcfun (activate-act-ctx "ActivateActCtx" :convention :stdcall :library "user32.dll")
+:int
+(h-act-ctx :int64)
+(lp-cookie :uint64))
+
+(cffi:defcfun (deactivate-act-ctx "DeactivateActCtx" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(ul-cookie :uint64))
+
+(cffi:defcfun (get-current-act-ctx "GetCurrentActCtx" :convention :stdcall :library "user32.dll")
+:int
+(lph-act-ctx :int64))
+
+(cffi:defcstruct actctx_section_keyed_data_2600
+(cb-size :ulong)
+(ul-data-format-version :ulong)
+(lp-data (:string :void))
+(ul-length :ulong)
+(lp-section-global-data (:string :void))
+(ul-section-global-data-length :ulong)
+(lp-section-base (:string :void))
+(ul-section-total-length :ulong)
+(h-act-ctx :int64)
+(ul-assembly-roster-index :ulong))
+
+(cffi:defcstruct actctx_section_keyed_data_assembly_metadata
+(lp-information (:string :void))
+(lp-section-base (:string :void))
+(ul-section-length :ulong)
+(lp-section-global-data-base (:string :void))
+(ul-section-global-data-length :ulong))
+
+(cffi:defcstruct actctx_section_keyed_data
+(cb-size :ulong)
+(ul-data-format-version :ulong)
+(lp-data (:string :void))
+(ul-length :ulong)
+(lp-section-global-data (:string :void))
+(ul-section-global-data-length :ulong)
+(lp-section-base (:string :void))
+(ul-section-total-length :ulong)
+(h-act-ctx :int64)
+(ul-assembly-roster-index :ulong)
+(here (:pointer (:struct stops)))
+(ul-flags :ulong)
+(assembly-metadata (:pointer (:struct actctx_section_keyed_data_assembly_metadata))))
+
+(cffi:defcfun (find-act-ctx-section-string "FindActCtxSectionStringW" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(lp-extension-guid (:pointer (:struct guid)))
+(ul-section-id :ulong)
+(lp-string-to-find (:string :encoding :utf-16le))
+(returned-data (:pointer (:struct pactctx_section_keyed_data))))
+
+(cffi:defcfun (find-act-ctx-section-guid "FindActCtxSectionGuid" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(lp-extension-guid (:pointer (:struct guid)))
+(ul-section-id :ulong)
+(lp-guid-to-find (:pointer (:struct guid)))
+(returned-data (:pointer (:struct pactctx_section_keyed_data))))
+
+(cffi:defcfun (query-act-ctx "QueryActCtxW" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(h-act-ctx :int64)
+(pv-sub-instance (:string :void))
+(ul-info-class :ulong)
+(cb-buffer :uint64)
+(pcb-written-or-required :uint64))
+
+(cffi:defcfun (process-id-to-session-id "ProcessIdToSessionId" :convention :stdcall :library "user32.dll")
+:int
+(dw-process-id :ulong)
+(p-session-id :ulong))
+
+(cffi:defcfun (wts-get-active-console-session-id "WTSGetActiveConsoleSessionId" :convention :stdcall :library "user32.dll")
+:ulong
+(void :void))
+
+(cffi:defcfun (is-wow64-process "IsWow64Process" :convention :stdcall :library "user32.dll")
+:int
+(h-process :int64)
+(wow64-process (:pointer :int)))
+
+(cffi:defcfun (get-logical-processor-information "GetLogicalProcessorInformation" :convention :stdcall :library "user32.dll")
+:int
+(returned-length (:pointer :int32)))
+
+(cffi:defcfun (get-logical-processor-information-ex "GetLogicalProcessorInformationEx" :convention :stdcall :library "user32.dll")
+:int
+(relationship-type (:pointer (:struct logical_processor_relationship)))
+(returned-length (:pointer :int32)))
+
+(cffi:defcfun (get-active-processor-group-count "GetActiveProcessorGroupCount" :convention :stdcall :library "user32.dll")
+:ushort
+(void :void))
+
+(cffi:defcfun (get-maximum-processor-group-count "GetMaximumProcessorGroupCount" :convention :stdcall :library "user32.dll")
+:ushort
+(void :void))
+
+(cffi:defcfun (get-active-processor-count "GetActiveProcessorCount" :convention :stdcall :library "user32.dll")
+:ulong
+(group-number :ushort))
+
+(cffi:defcfun (get-maximum-processor-count "GetMaximumProcessorCount" :convention :stdcall :library "user32.dll")
+:ulong
+(group-number :ushort))
+
+(cffi:defcfun (get-numa-highest-node-number "GetNumaHighestNodeNumber" :convention :stdcall :library "user32.dll")
+:int
+(highest-node-number (:pointer :ulong)))
+
+(cffi:defcfun (get-numa-processor-node "GetNumaProcessorNode" :convention :stdcall :library "user32.dll")
+:int
+(processor :uchar)
+(node-number (:pointer :uchar)))
+
+(cffi:defcfun (get-numa-node-number-from-handle "GetNumaNodeNumberFromHandle" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(node-number (:pointer :ushort)))
+
+(cffi:defcfun (get-numa-processor-node-ex "GetNumaProcessorNodeEx" :convention :stdcall :library "user32.dll")
+:int
+(processor (:pointer (:struct pprocessor_number)))
+(node-number (:pointer :ushort)))
+
+(cffi:defcfun (get-numa-node-processor-mask "GetNumaNodeProcessorMask" :convention :stdcall :library "user32.dll")
+:int
+(node :uchar)
+(processor-mask (:pointer :ullong)))
+
+(cffi:defcfun (get-numa-node-processor-mask-ex "GetNumaNodeProcessorMaskEx" :convention :stdcall :library "user32.dll")
+:int
+(node :ushort)
+(processor-mask (:pointer (:struct pgroup_affinity))))
+
+(cffi:defcfun (get-numa-available-memory-node "GetNumaAvailableMemoryNode" :convention :stdcall :library "user32.dll")
+:int
+(node :uchar)
+(available-bytes (:pointer :ullong)))
+
+(cffi:defcfun (get-numa-available-memory-node-ex "GetNumaAvailableMemoryNodeEx" :convention :stdcall :library "user32.dll")
+:int
+(node :ushort)
+(available-bytes (:pointer :ullong)))
+
+(cffi:defcfun (get-numa-proximity-node "GetNumaProximityNode" :convention :stdcall :library "user32.dll")
+:int
+(proximity-id :ulong)
+(node-number (:pointer :uchar)))
+
+(cffi:defcfun (get-numa-proximity-node-ex "GetNumaProximityNodeEx" :convention :stdcall :library "user32.dll")
+:int
+(proximity-id :ulong)
+(node-number (:pointer :ushort)))
+
+(cffi:defcfun (register-application-recovery-callback "RegisterApplicationRecoveryCallback" :convention :stdcall :library "user32.dll")
+:long
+(p-recovey-callback (:pointer (:struct application_recovery_callback)))
+(pv-parameter (:string :void))
+(dw-ping-interval :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (unregister-application-recovery-callbackvoid "UnregisterApplicationRecoveryCallbackvoid" :convention :stdcall :library "user32.dll")
+:long)
+
+(cffi:defcfun (register-application-restart "RegisterApplicationRestart" :convention :stdcall :library "user32.dll")
+:long
+(pwz-commandline (:string :encoding :utf-16le))
+(dw-flags :ulong))
+
+(cffi:defcfun (unregister-application-restartvoid "UnregisterApplicationRestartvoid" :convention :stdcall :library "user32.dll")
+:long)
+
+(cffi:defcfun (get-application-recovery-callback "GetApplicationRecoveryCallback" :convention :stdcall :library "user32.dll")
+:long
+(h-process :int64)
+(p-recovery-callback (:pointer (:struct application_recovery_callback)))
+(ppv-parameter (:string :void))
+(pdw-ping-interval (:pointer :int32))
+(pdw-flags (:pointer :int32)))
+
+(cffi:defcfun (get-application-restart-settings "GetApplicationRestartSettings" :convention :stdcall :library "user32.dll")
+:long
+(h-process :int64)
+(pwz-commandline (:string :encoding :utf-16le))
+(pcch-size (:pointer :int32))
+(pdw-flags (:pointer :int32)))
+
+(cffi:defcfun (application-recovery-in-progress "ApplicationRecoveryInProgress" :convention :stdcall :library "user32.dll")
+:long
+(pb-cancelled (:pointer :int)))
+
+(cffi:defcfun (application-recovery-finished "ApplicationRecoveryFinished" :convention :stdcall :library "user32.dll")
+:void
+(b-success :int))
+
+(cffi:defcfun (set-file-information-by-handle "SetFileInformationByHandle" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(file-information-class (:pointer (:struct file_info_by_handle_class)))
+(lp-file-information (:pointer :void))
+(dw-buffer-size :ulong))
+
+(cffi:defcfun (get-file-information-by-handle-ex "GetFileInformationByHandleEx" :convention :stdcall :library "user32.dll")
+:int
+(h-file :int64)
+(file-information-class (:pointer (:struct file_info_by_handle_class)))
+(lp-file-information (:pointer :void))
+(dw-buffer-size :ulong))
+
+(cffi:defcfun (open-file-by-id "OpenFileById" :convention :stdcall :library "user32.dll")
+:int64
+(h-volume-hint :int64)
+(lp-file-id (:pointer (:struct lpfile_id_descriptor)))
+(dw-desired-access :ulong)
+(dw-share-mode :ulong)
+(lp-security-attributes (:pointer (:struct lpsecurity_attributes)))
+(dw-flags-and-attributes :ulong))
+
+(cffi:defcfun (create-symbolic-link "CreateSymbolicLinkW" :convention :stdcall :library "user32.dll")
+:int8
+(lp-symlink-file-name (:string :encoding :utf-16le))
+(lp-target-file-name (:string :encoding :utf-16le))
+(dw-flags :ulong))
+
+(cffi:defcfun (create-symbolic-link-transacted "CreateSymbolicLinkTransactedW" :convention :stdcall :library "user32.dll")
+:int8
+(lp-symlink-file-name (:string :encoding :utf-16le))
+(lp-target-file-name (:string :encoding :utf-16le))
+(dw-flags :ulong)
+(h-transaction :int64))
+
+(cffi:defcfun (get-final-path-name-by-handle "GetFinalPathNameByHandleW" :convention :stdcall :library "user32.dll")
+:ulong
+(h-file :int64)
+(lpsz-file-path (:string :encoding :utf-16le))
+(cch-file-path :ulong)
+(dw-flags :ulong))
+
+(cffi:defcfun (query-act-ctx-settings "QueryActCtxSettingsW" :convention :stdcall :library "user32.dll")
+:int
+(dw-flags :ulong)
+(h-act-ctx :int64)
+(settings-name-space (:string :encoding :utf-16le))
+(setting-name (:string :encoding :utf-16le))
+(dw-buffer :uint64)
+(pdw-written-or-required :uint64))
+
+(cffi:defcfun (replace-partition-unit "ReplacePartitionUnit" :convention :stdcall :library "user32.dll")
+:int
+(target-partition (:string :encoding :utf-16le))
+(spare-partition (:string :encoding :utf-16le))
+(flags :ulong))
+
+(cffi:defcfun (add-secure-memory-cache-callback "AddSecureMemoryCacheCallback" :convention :stdcall :library "user32.dll")
+:int
+(pfn-call-back (:pointer (:struct psecure_memory_cache_callback))))
+
+(cffi:defcfun (remove-secure-memory-cache-callback "RemoveSecureMemoryCacheCallback" :convention :stdcall :library "user32.dll")
+:int
+(pfn-call-back (:pointer (:struct psecure_memory_cache_callback))))
+
+(cffi:defcfun (copy-extended-context "CopyExtendedContext" :convention :stdcall :library "user32.dll")
+:int
+(destination (:pointer (:struct pcontext_ex)))
+(context-flags :ulong)
+(source (:pointer (:struct pcontext_ex))))
+
+(cffi:defcfun (initialize-extended-context "InitializeExtendedContext" :convention :stdcall :library "user32.dll")
+:int
+(context (:string :void))
+(context-flags :ulong)
+(context-ex (:pointer (:struct pcontext_ex))))
+
+(cffi:defcfun (get-enabled-extended-features "GetEnabledExtendedFeatures" :convention :stdcall :library "user32.dll")
+:uint64
+(feature-mask :uint64))
+
+(cffi:defcfun (get-extended-context-length "GetExtendedContextLength" :convention :stdcall :library "user32.dll")
+:int
+(context-flags :ulong)
+(context-length (:pointer :int32)))
+
+(cffi:defcfun (get-extended-features-mask "GetExtendedFeaturesMask" :convention :stdcall :library "user32.dll")
+:uint64
+(context-ex (:pointer (:struct pcontext_ex))))
+
+(cffi:defcfun (locate-extended-feature "LocateExtendedFeature" :convention :stdcall :library "user32.dll")
+(:string :void)
+(context-ex (:pointer (:struct pcontext_ex)))
+(feature-id :ulong)
+(length (:pointer :int32)))
+
+(cffi:defcfun (locate-legacy-context "LocateLegacyContext" :convention :stdcall :library "user32.dll")
+:PCONTEXT
+(context-ex (:pointer (:struct pcontext_ex)))
+(length (:pointer :int32)))
+
+(cffi:defcfun (set-extended-features-mask "SetExtendedFeaturesMask" :convention :stdcall :library "user32.dll")
+:void
+(context-ex (:pointer (:struct pcontext_ex)))
+(feature-mask :uint64))
+
+(cffi:defcfun (enable-thread-profiling "EnableThreadProfiling" :convention :stdcall :library "user32.dll")
+:ulong
+(thread-handle :int64)
+(flags :ulong)
+(hardware-counters :uint64)
+(performance-data-handle :int64))
+
+(cffi:defcfun (disable-thread-profiling "DisableThreadProfiling" :convention :stdcall :library "user32.dll")
+:ulong
+(performance-data-handle :int64))
+
+(cffi:defcfun (query-thread-profiling "QueryThreadProfiling" :convention :stdcall :library "user32.dll")
+:ulong
+(thread-handle :int64)
+(enabled (:pointer :int8)))
+
+(cffi:defcfun (read-thread-profiling-data "ReadThreadProfilingData" :convention :stdcall :library "user32.dll")
+:ulong
+(performance-data-handle :int64)
+(flags :ulong)
+(performance-data (:pointer (:struct pperformance_data))))

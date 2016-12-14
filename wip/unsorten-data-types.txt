@@ -1,0 +1,16 @@
+__nullterminated	CONST	CHAR	*LPCSTR;
+BOOL	far	*LPBOOL;	
+BYTE	far	*LPBYTE;	
+CONST	void	*LPCVOID;	
+CONST	WCHAR	*LPCWSTR;	
+CONST	CHAR	*PCSTR;	
+CONST	WCHAR	*PCWSTR;	
+#define	POINTER_32	__ptr32	
+#define	POINTER_64	__ptr64	
+#define	POINTER_signed	__sptr	
+#define	CALLBACK	__stdcall	
+#define	WINAPI	__stdcall	
+#define	POINTER_UNsigned	__uptr	
+#define	CONST	const	
+#define	VOID	void	
+#define	APIENTRY	WINAPI	
